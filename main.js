@@ -513,7 +513,7 @@ async function loadProjectContent(projectId) {
   const slot = document.getElementById(projectId + '-slot');
   if (!slot || slot.dataset.loaded) return;
   try {
-    const res = await fetch('protected/' + projectId + '.html');
+    const res = await fetch('projects/' + projectId + '.html');
     if (res.ok) {
       slot.innerHTML = await res.text();
       slot.dataset.loaded = 'true';
