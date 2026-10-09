@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Training Guide — Canada & Remote 2025–2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0b0f1a;
+  --bg2:      #111827;
+  --bg3:      #1a2236;
+  --card:     #141c2e;
+  --card2:    #1e2a40;
+  --border:   #263048;
+  --border2:  #334166;
+  --cyan:     #22d3ee;
+  --cyan2:    #0ea5e9;
+  --amber:    #f59e0b;
+  --green:    #10b981;
+  --purple:   #a78bfa;
+  --pink:     #f472b6;
+  --red:      #f87171;
+  --text:     #e2e8f0;
+  --text2:    #94a3b8;
+  --text3:    #64748b;
+  --radius:   10px;
+  --radius2:  16px;
+  --shadow:   0 4px 24px rgba(0,0,0,0.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
+
+/* ── HEADER ── */
+.site-header{background:linear-gradient(135deg,#0b1629 0%,#0f2040 50%,#0b1629 100%);border-bottom:1px solid var(--border);padding:0;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.header-inner{max-width:1280px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-badge{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:#000;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;white-space:nowrap;letter-spacing:.05em}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);letter-spacing:-.02em}
+.logo-text span{color:var(--cyan)}
+.header-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);text-align:right;line-height:1.8}
+
+/* ── HERO ── */
+.hero{max-width:1280px;margin:0 auto;padding:56px 24px 36px}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,5vw,52px);line-height:1.1;letter-spacing:-.03em;margin-bottom:16px}
+.hero h1 .accent{color:var(--cyan);display:block}
+.hero-sub{font-size:16px;color:var(--text2);max-width:640px;margin-bottom:32px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column}
+.stat-num{font-family:'Syne',sans-serif;font-weight:700;font-size:28px;color:var(--cyan)}
+.stat-label{font-size:12px;color:var(--text3);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase}
+
+/* ── ROLE FINDER ── */
+.finder-section{max-width:1280px;margin:0 auto;padding:0 24px 40px}
+.finder-card{background:linear-gradient(135deg,var(--card) 0%,#0f2040 100%);border:1px solid var(--cyan);border-radius:var(--radius2);padding:28px;position:relative;overflow:hidden}
+.finder-card::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(34,211,238,.08) 0%,transparent 70%);pointer-events:none}
+.finder-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--cyan);margin-bottom:6px}
+.finder-subtitle{font-size:13px;color:var(--text2);margin-bottom:24px}
+.finder-question{font-size:15px;font-weight:600;color:var(--text);margin-bottom:14px}
+.finder-options{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.finder-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:8px 18px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;transition:all .2s;line-height:1}
+.finder-btn:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(34,211,238,.05)}
+.finder-btn.selected{background:rgba(34,211,238,.12);border-color:var(--cyan);color:var(--cyan)}
+.finder-result{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:20px;display:none}
+.finder-result.visible{display:block;animation:fadeIn .3s ease}
+.path-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--amber);margin-bottom:12px}
+.path-steps{display:flex;flex-direction:column;gap:8px}
+.path-step{display:flex;align-items:flex-start;gap:12px}
+.step-num{background:var(--amber);color:#000;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;padding:2px 7px;border-radius:4px;flex-shrink:0;margin-top:2px}
+.step-text{font-size:13px;color:var(--text2)}
+.step-text strong{color:var(--text)}
+.finder-reset{background:none;border:1px solid var(--border2);color:var(--text3);padding:6px 14px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;margin-top:14px;transition:all .2s}
+.finder-reset:hover{border-color:var(--border2);color:var(--text)}
+
+/* ── FILTERS ── */
+.controls{max-width:1280px;margin:0 auto;padding:0 24px 24px;display:flex;flex-direction:column;gap:16px}
+.search-wrap{position:relative}
+.search-input{width:100%;background:var(--card);border:1px solid var(--border2);color:var(--text);padding:12px 44px 12px 16px;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{border-color:var(--cyan)}
+.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;font-size:16px}
+.filter-groups{display:flex;flex-direction:column;gap:12px}
+.filter-group{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.filter-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);min-width:68px}
+.chip{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:500;transition:all .18s;white-space:nowrap;user-select:none}
+.chip:hover{border-color:var(--border2);color:var(--text)}
+.chip.active{color:#000;font-weight:600;border-color:transparent}
+.chip.active.cat-cyber{background:var(--cyan);color:#000}
+.chip.active.cat-sysadmin{background:var(--green);color:#000}
+.chip.active.cat-agents{background:var(--purple);color:#000}
+.chip.active.cat-all{background:var(--text2);color:#000}
+.chip.active.fmt-remote{background:var(--cyan2);color:#fff}
+.chip.active.fmt-inperson{background:var(--amber);color:#000}
+.chip.active.fmt-both{background:var(--text2);color:#000}
+.chip.active.cost-free{background:var(--green);color:#000}
+.chip.active.cost-low{background:#84cc16;color:#000}
+.chip.active.cost-mid{background:var(--amber);color:#000}
+.chip.active.cost-high{background:var(--red);color:#fff}
+.chip.active.lvl-all{background:var(--text2);color:#000}
+.chip.active.lvl-intro{background:var(--green);color:#000}
+.chip.active.lvl-intermediate{background:var(--cyan);color:#000}
+.chip.active.lvl-advanced{background:var(--purple);color:#fff}
+.results-bar{display:flex;align-items:center;justify-content:space-between;padding:0 24px;max-width:1280px;margin:0 auto 16px;font-size:13px;color:var(--text3)}
+.results-count strong{color:var(--text)}
+.clear-all{background:none;border:none;color:var(--cyan);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;padding:0}
+.clear-all:hover{text-decoration:underline}
+
+/* ── GRID ── */
+.grid{max-width:1280px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+
+/* ── CARD ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer}
+.card:hover{transform:translateY(-3px);border-color:var(--border2);box-shadow:var(--shadow)}
+.card.hidden{display:none}
+.card-accent{height:3px;width:100%}
+.card-head{padding:20px 20px 14px;flex:1}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.card-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.card-badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.badge-cyber{background:rgba(34,211,238,.12);color:var(--cyan);border:1px solid rgba(34,211,238,.2)}
+.badge-sysadmin{background:rgba(16,185,129,.12);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+.badge-agents{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.2)}
+.badge-sap{background:rgba(244,114,182,.12);color:var(--pink);border:1px solid rgba(244,114,182,.2)}
+.badge-remote{background:rgba(14,165,233,.1);color:var(--cyan2);border:1px solid rgba(14,165,233,.2)}
+.badge-inperson{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+.badge-free{background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+.badge-cert{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;line-height:1.25;color:var(--text);margin-bottom:6px}
+.card-provider{font-size:12px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
+.card-desc{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:14px}
+.card-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.meta-item{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px 10px}
+.meta-label{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:2px}
+.meta-value{font-size:12px;font-weight:500;color:var(--text);line-height:1.3}
+.meta-value.cost-free{color:var(--green)}
+.meta-value.cost-low{color:#84cc16}
+.meta-value.cost-mid{color:var(--amber)}
+.meta-value.cost-high{color:var(--red)}
+.card-toggle{padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--text3);font-weight:500;transition:background .15s}
+.card:hover .card-toggle{background:rgba(255,255,255,.02)}
+.toggle-arrow{transition:transform .25s;font-size:14px}
+.card-details{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.card-details.open{max-height:800px;padding:16px 20px 20px}
+.details-section{margin-bottom:16px}
+.details-section:last-child{margin-bottom:0}
+.details-heading{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+.detail-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.detail-list li{font-size:12px;color:var(--text2);padding-left:14px;position:relative;line-height:1.5}
+.detail-list li::before{content:'›';position:absolute;left:0;color:var(--cyan2)}
+.prereq-box{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:12px;color:var(--text2);line-height:1.5}
+.prereq-box strong{color:var(--amber)}
+.url-link{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);text-decoration:none;background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.2);padding:5px 12px;border-radius:6px;margin-top:8px;transition:background .15s}
+.url-link:hover{background:rgba(34,211,238,.14)}
+
+/* ── EMPTY STATE ── */
+.empty{display:none;max-width:1280px;margin:0 auto;padding:60px 24px;text-align:center}
+.empty.visible{display:block}
+.empty-icon{font-size:48px;margin-bottom:16px}
+.empty-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:8px}
+.empty-sub{color:var(--text2);font-size:14px}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:fadeIn .3s ease both}
+.card:nth-child(2){animation-delay:.04s}
+.card:nth-child(3){animation-delay:.08s}
+.card:nth-child(4){animation-delay:.12s}
+.card:nth-child(5){animation-delay:.16s}
+.card:nth-child(6){animation-delay:.20s}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-size:12px;color:var(--text3);font-family:'JetBrains Mono',monospace}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .hero h1{font-size:28px}
+  .hero-stats{gap:20px}
+  .finder-options{gap:8px}
+  .filter-group{gap:6px}
+  .card-meta{grid-template-columns:1fr}
+  .header-meta{display:none}
+  .controls{padding:0 16px 16px}
+  .grid{padding:0 16px 60px}
+  .finder-section,.results-bar{padding-left:16px;padding-right:16px}
+  .hero{padding:36px 16px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-badge">AI/2026</span>
+      <span class="logo-text">Training<span> Guide</span></span>
+    </div>
+    <div class="header-meta">
+      Canada &amp; Remote Programs<br>
+      Cybersecurity · Sysadmin · AI Agents
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Hi V!<br>Find Your<span class="accent">AI Training Path</span></h1>
+  <p class="hero-sub">Filter and explore 17 programs covering AI for cybersecurity, system administration, and enterprise AI agent development — Canada and remote options for 2025–2026.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num" id="totalCount">17</span><span class="stat-label">Programs</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Free Options</span></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">In-Person CA</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Certifications</span></div>
+  </div>
+</section>
+
+<!-- ROLE FINDER -->
+<section class="finder-section">
+  <div class="finder-card">
+    <div class="finder-title">⚡ Role-Based Path Finder</div>
+    <div class="finder-subtitle">Tell us your role and we'll map your ideal learning sequence.</div>
+    <div class="finder-question">What best describes your current role?</div>
+    <div class="finder-options">
+      <button class="finder-btn" onclick="showPath('sap-admin')">SAP Admin / Functional Consultant</button>
+      <button class="finder-btn" onclick="showPath('sap-dev')">SAP Developer / BTP Engineer</button>
+      <button class="finder-btn" onclick="showPath('cybersec')">Cybersecurity Professional</button>
+      <button class="finder-btn" onclick="showPath('sysadmin')">System Administrator</button>
+      <button class="finder-btn" onclick="showPath('ops')">Production / Operations Manager</button>
+      <button class="finder-btn" onclick="showPath('architect')">IT Architect / Team Lead</button>
+    </div>
+    <div class="finder-result" id="finderResult">
+      <div class="path-title" id="pathTitle"></div>
+      <div class="path-steps" id="pathSteps"></div>
+      <button class="finder-reset" onclick="resetFinder()">↩ Choose different role</button>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="controls">
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput" placeholder="Search programs, skills, technologies..." oninput="applyFilters()">
+    <span class="search-icon">⌕</span>
+  </div>
+  <div class="filter-groups">
+    <div class="filter-group">
+      <span class="filter-label">Category</span>
+      <span class="chip cat-all active" data-group="cat" data-value="all" onclick="setFilter(this)">All</span>
+      <span class="chip cat-cyber" data-group="cat" data-value="cyber" onclick="setFilter(this)">Cybersecurity</span>
+      <span class="chip cat-sysadmin" data-group="cat" data-value="sysadmin" onclick="setFilter(this)">Sysadmin</span>
+      <span class="chip cat-agents" data-group="cat" data-value="agents" onclick="setFilter(this)">AI Agents / SAP</span>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Format</span>
+      <span class="chip fmt-both active" data-group="fmt" data-value="all" onclick="setFilter(this)">All</span>
+      <span class="chip fmt-remote" data-group="fmt" data-value="remote" onclick="setFilter(this)">Remote</span>
+      <span class="chip fmt-inperson" data-group="fmt" data-value="inperson" onclick="setFilter(this)">In-Person Canada</span>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Cost</span>
+      <span class="chip lvl-all active" data-group="cost" data-value="all" onclick="setFilter(this)">All</span>
+      <span class="chip cost-free" data-group="cost" data-value="free" onclick="setFilter(this)">Free</span>
+      <span class="chip cost-low" data-group="cost" data-value="low" onclick="setFilter(this)">&lt; $500</span>
+      <span class="chip cost-mid" data-group="cost" data-value="mid" onclick="setFilter(this)">$500–$3k</span>
+      <span class="chip cost-high" data-group="cost" data-value="high" onclick="setFilter(this)">$3k+</span>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Level</span>
+      <span class="chip lvl-all active" data-group="level" data-value="all" onclick="setFilter(this)">All</span>
+      <span class="chip lvl-intro" data-group="level" data-value="intro" onclick="setFilter(this)">Intro</span>
+      <span class="chip lvl-intermediate" data-group="level" data-value="intermediate" onclick="setFilter(this)">Intermediate</span>
+      <span class="chip lvl-advanced" data-group="level" data-value="advanced" onclick="setFilter(this)">Advanced</span>
+    </div>
+  </div>
+</div>
+
+<div class="results-bar">
+  <span id="resultLabel">Showing <strong>17</strong> of 17 programs</span>
+  <button class="clear-all" onclick="clearAll()">Clear all filters</button>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="grid"></div>
+<div class="empty" id="emptyState">
+  <div class="empty-icon">🔍</div>
+  <div class="empty-title">No programs match your filters</div>
+  <div class="empty-sub">Try broadening your search or clearing some filters.</div>
+</div>
+
+<footer>Compiled April 2026 · Sources: UBC Extended Learning, Humber Polytechnic, SAIT, SANS Institute, SAP Learning, Learning Tree, CCCS, Fortinet, University of Waterloo, Udemy</footer>
+
+<script>
+const PROGRAMS = [
+  {
+    id: 1,
+    title: "UBC AI Skills Accelerator — Cybersecurity Track",
+    provider: "UBC Extended Learning",
+    categories: ["cyber","sysadmin"],
+    format: "remote",
+    cost: "high",
+    costDisplay: "$4,875–$6,175 CAD",
+    costClass: "cost-high",
+    level: "intermediate",
+    levelDisplay: "Intermediate",
+    credential: "UBC Certificate",
+    location: "100% Online",
+    duration: "20 stackable 2-week micro-courses",
+    accent: "#22d3ee",
+    badges: ["badge-cyber","badge-remote"],
+    badgeLabels: ["Cybersecurity","Remote"],
+    desc: "Most purpose-built option for working IT and cybersecurity professionals. Three-course cybersecurity track from threat detection fundamentals to advanced AI defence strategy.",
+    highlights: [
+      "3-course cybersecurity track: Intro → Real-Time Threat Detection → Advanced Defence Strategies",
+      "Advanced level: NLP/ML for threat intelligence, reinforcement learning for autonomous defence",
+      "20 stackable micro-courses across 7 tracks including governance and enterprise integration",
+      "Technical pathway for cybersecurity analysts, IT infrastructure specialists, system architects",
+      "Each micro-course: ~14 hours/week over 2 weeks; live virtual sessions + independent study",
+      "Pass/fail basis — 70% minimum to earn certificate credit; group rates available"
+    ],
+    prereqs: "Basic cybersecurity knowledge, familiarity with network security principles, and general IT infrastructure awareness. Cybersecurity 1 requires completing AI Foundations 1 first.",
+    upcoming: "Rolling intakes — check extendedlearning.ubc.ca for next cohort dates",
+    url: "extendedlearning.ubc.ca",
+    search: "ubc ai skills accelerator cybersecurity threat detection defence nlp ml cloud canada"
+  },
+  {
+    id: 2,
+    title: "Learning Tree — AI Cybersecurity: Attack & Defend + SecAI+",
+    provider: "Learning Tree International",
+    categories: ["cyber"],
+    format: "both",
+    cost: "mid",
+    costDisplay: "From ~$795 USD/course",
+    costClass: "cost-mid",
+    level: "intermediate",
+    levelDisplay: "Intermediate",
+    credential: "CompTIA SecAI+ / CEH v13",
+    location: "Remote + Ottawa (In-Person)",
+    duration: "3–5 days per course",
+    accent: "#22d3ee",
+    badges: ["badge-cyber","badge-remote","badge-inperson","badge-cert"],
+    badgeLabels: ["Cybersecurity","Remote","In-Person","Certification"],
+    desc: "Best short-course option for practitioners seeking certification. Attack & Defend course covers adversarial AI, deepfakes, LLMs as attack vectors, and AI-powered SecOps transformation.",
+    highlights: [
+      "AI Cybersecurity: Attack & Defend — LLMs, RAG, agentic AI architecture, adversarial attacks, deepfakes, NIST AI RMF",
+      "CompTIA SecAI+ — first global vendor-neutral cert for AI security; targets 3–4 yrs IT + 2 yrs cybersecurity experience",
+      "AI-Powered SecOps, SIEM & SOAR — 3-day hands-on course on threat detection and incident response",
+      "ISACA AAISM certification course also available",
+      "Private team training can be brought on-site to your facility across Canada",
+      "100% satisfaction guarantee + after-course instructor coaching"
+    ],
+    prereqs: "Foundational networking and cybersecurity knowledge required for most courses.",
+    upcoming: "April 29–May 1, 2026 · May 13–15, 2026 (9:00 AM–4:30 PM EDT, Guaranteed-to-Run)",
+    url: "learningtree.ca",
+    search: "learning tree comptia secai cybersecurity attack defend siem soar soc ottawa canada inperson"
+  },
+  {
+    id: 3,
+    title: "SANS SEC595 — Applied Data Science & AI/ML for Cybersecurity",
+    provider: "SANS Institute",
+    categories: ["cyber"],
+    format: "remote",
+    cost: "high",
+    costDisplay: "~$7,000–$10,000 USD",
+    costClass: "cost-high",
+    level: "advanced",
+    levelDisplay: "Advanced",
+    credential: "GIAC GMLE",
+    location: "Live Online",
+    duration: "6 days (4-month OnDemand replay included)",
+    accent: "#f472b6",
+    badges: ["badge-cyber","badge-remote","badge-cert"],
+    badgeLabels: ["Cybersecurity","Remote","GIAC Cert"],
+    desc: "Gold standard for senior cybersecurity practitioners. 70%+ hands-on labs. GIAC GMLE certification is globally recognized across enterprise, government, and military sectors.",
+    highlights: [
+      "70%+ of class time in hands-on labs — Python data acquisition, SQL/NoSQL/web data sources",
+      "Statistical foundations, ML models, deep neural networks for security applications",
+      "Malware detection, phishing identification, behavioral analysis using neural networks",
+      "Convolutional networks and autoencoder architectures for anomaly detection in logs and network traffic",
+      "Synthetic data generation, genetic hyperparameter optimization, deployment strategies",
+      "GIAC GMLE certification — most rigorous and respected cybersecurity AI credential globally"
+    ],
+    prereqs: "Prior cybersecurity experience strongly recommended. Python programming skills helpful.",
+    upcoming: "SANS AI Security Training: August 2026. Early bird code EarlyBirdNA saves $750 USD (pay by May 12, 2026)",
+    url: "sans.org",
+    search: "sans sec595 data science machine learning cybersecurity giac gmle python malware detection"
+  },
+  {
+    id: 4,
+    title: "Canadian Centre for Cyber Security — Learning Hub",
+    provider: "Government of Canada",
+    categories: ["cyber","sysadmin"],
+    format: "remote",
+    cost: "free",
+    costDisplay: "Free",
+    costClass: "cost-free",
+    level: "intro",
+    levelDisplay: "All Levels",
+    credential: "Gov't Recognized",
+    location: "Online (Canada)",
+    duration: "Self-paced",
+    accent: "#10b981",
+    badges: ["badge-cyber","badge-remote","badge-free"],
+    badgeLabels: ["Cybersecurity","Remote","Free"],
+    desc: "Government-run, Canada-threat-focused. Best free option for public sector professionals and those needing Canadian compliance alignment. New DevSecOps course launched 2026.",
+    highlights: [
+      "Courses developed specifically for the Canadian threat landscape and compliance environment",
+      "New DevSecOps course: security integration across development and operations lifecycle",
+      "Designed for developers, security professionals, and executives",
+      "Self-paced online + instructor-led courses via learning management system (LMS)",
+      "Strong fit for federal/provincial government orgs and regulated industries",
+      "No cost — excellent starting point before investing in paid certifications"
+    ],
+    prereqs: "No specific prerequisites — open to all Canadian IT professionals.",
+    upcoming: "Ongoing — self-register via learning management system at cyber.gc.ca",
+    url: "cyber.gc.ca/en/education-community/learning-hub",
+    search: "cccs canadian centre cyber security free government devsecops compliance canada"
+  },
+  {
+    id: 5,
+    title: "Fortinet NSE Program — AI-Driven Security Operations",
+    provider: "Fortinet",
+    categories: ["cyber","sysadmin"],
+    format: "remote",
+    cost: "free",
+    costDisplay: "Free (labs: nominal fee)",
+    costClass: "cost-free",
+    level: "intro",
+    levelDisplay: "All Levels",
+    credential: "NSE Certification (Levels 1–8)",
+    location: "Online",
+    duration: "Self-paced tracks",
+    accent: "#10b981",
+    badges: ["badge-sysadmin","badge-remote","badge-free","badge-cert"],
+    badgeLabels: ["Sysadmin","Remote","Free","NSE Cert"],
+    desc: "Best free option for network administrators and infrastructure teams. Covers AI-driven security operations, adaptive cloud security, and zero-trust network access. 2026 content updated.",
+    highlights: [
+      "AI-driven security operations: threat detection, automated response, and analytics",
+      "Adaptive cloud security and zero-trust network access modules",
+      "Structured NSE tracks from foundational to expert level",
+      "2026 NSE Certification Program updates with expanded AI-driven security content",
+      "On-demand labs available for nominal fee to support self-paced training",
+      "Ideal for Fortinet-environment network admins, infrastructure engineers, and SecOps teams"
+    ],
+    prereqs: "No prerequisites for entry-level tracks. Higher NSE levels require prior completion of lower levels.",
+    upcoming: "Available anytime — self-paced",
+    url: "fortinet.com/training",
+    search: "fortinet nse network security operations zero trust cloud adaptive free certification sysadmin"
+  },
+  {
+    id: 6,
+    title: "University of Waterloo — AI Certificate (Technical Track)",
+    provider: "WatSPEED — University of Waterloo",
+    categories: ["sysadmin","agents"],
+    format: "remote",
+    cost: "mid",
+    costDisplay: "Save 15% bundling 3–4 courses",
+    costClass: "cost-mid",
+    level: "intermediate",
+    levelDisplay: "Intermediate",
+    credential: "UWaterloo AI Certificate",
+    location: "Online",
+    duration: "Self-paced + live virtual sessions",
+    accent: "#22d3ee",
+    badges: ["badge-sysadmin","badge-remote"],
+    badgeLabels: ["Sysadmin","Remote"],
+    desc: "Strong Canadian university credential for DevOps engineers, cloud engineers, and technical IT professionals wanting to build and deploy production-grade AI systems.",
+    highlights: [
+      "Technical track: building and deploying production-grade AI systems using modern frameworks and cloud tools",
+      "Data Preparation in Python for ML applications (next: Jan 19, 2026)",
+      "Supervised learning algorithms — Python hands-on implementation",
+      "Neural networks: RNNs, CNNs, and transformers (next start: April 20, 2026)",
+      "15% bundle discount when enrolling in 3–4 courses simultaneously",
+      "Strategy and Business Track; Policy, Governance and Ethics Track also coming soon"
+    ],
+    prereqs: "Python programming experience helpful for most courses. No prior AI experience required for foundational modules.",
+    upcoming: "Neural Networks course: April 20, 2026. Other courses: January 2026 cohorts",
+    url: "watspeed.uwaterloo.ca",
+    search: "waterloo ai certificate technical devops cloud engineer python neural networks machine learning"
+  },
+  {
+    id: 7,
+    title: "Humber Polytechnic — Cybersecurity & AI Graduate Certificate",
+    provider: "Humber Polytechnic (Toronto)",
+    categories: ["cyber"],
+    format: "inperson",
+    cost: "high",
+    costDisplay: "~$6,000–$9,000 CAD/year",
+    costClass: "cost-high",
+    level: "intermediate",
+    levelDisplay: "Intermediate",
+    credential: "Ontario Grad Cert + EC-Council CEH",
+    location: "Toronto, ON (In-Person)",
+    duration: "2 semesters",
+    accent: "#f59e0b",
+    badges: ["badge-cyber","badge-inperson","badge-cert"],
+    badgeLabels: ["Cybersecurity","In-Person","CEH Cert"],
+    desc: "Best in-person option in Toronto. Two-semester grad certificate with AI-driven cybersecurity curriculum, hands-on labs, and the EC-Council Certified Ethical Hacker credential included.",
+    highlights: [
+      "Integrates AI-driven cybersecurity: threat analysis, AI-based defence mechanisms, and digital forensics",
+      "Includes EC-Council Certified Ethical Hacker (CEH) certification upon graduation",
+      "Developed in partnership with industry certification bodies",
+      "Capstone project: real-world cybersecurity challenge solutions",
+      "PGWP-eligible; Faculty of Applied Sciences & Technology",
+      "3 intakes per year: May, September, and January"
+    ],
+    prereqs: "Prior post-secondary credential in IT or related field. Contact admissions at 416-675-3111.",
+    upcoming: "Intakes: May, September, and January. Program code: CA511",
+    url: "humber.ca/explore-programs/programs/cybersecurity-and-artificial-intelligence",
+    search: "humber polytechnic toronto cybersecurity AI certificate CEH in-person ontario graduate"
+  },
+  {
+    id: 8,
+    title: "SAIT — Integrated Artificial Intelligence Certificate",
+    provider: "Southern Alberta Institute of Technology",
+    categories: ["sysadmin","agents"],
+    format: "inperson",
+    cost: "high",
+    costDisplay: "~$5,000–$8,000 CAD + $1,500 books",
+    costClass: "cost-high",
+    level: "intermediate",
+    levelDisplay: "Intermediate",
+    credential: "SAIT Certificate of Achievement",
+    location: "Calgary, AB (In-Person)",
+    duration: "~1 year; up to 3 years to complete",
+    accent: "#f59e0b",
+    badges: ["badge-sysadmin","badge-inperson"],
+    badgeLabels: ["Sysadmin","In-Person"],
+    desc: "Technically applied in-person program in Calgary. Non-credit continuing education track available for working professionals. Minimum 144 required course hours.",
+    highlights: [
+      "Technically applied program emphasizing production-ready AI implementation",
+      "Non-credit continuing education certificate track available — no need for full enrollment",
+      "Located in Calgary, growing tech and energy-sector AI hub",
+      "Bring-your-own-device; power-user hardware requirements",
+      "Certificate of Achievement requires minimum 144 course hours",
+      "Up to 3 years to complete — accommodates working professionals"
+    ],
+    prereqs: "Combination of education and professional experience may be considered. English language proficiency required.",
+    upcoming: "Application deadline: October 9, 2026 (next major intake)",
+    url: "sait.ca/programs-and-courses/certificates/integrated-artificial-intelligence",
+    search: "SAIT calgary alberta AI certificate in-person integrated artificial intelligence applied"
+  },
+  {
+    id: 9,
+    title: "Learning Tree — In-Person Classroom (Ottawa + Canada)",
+    provider: "Learning Tree International",
+    categories: ["cyber","sysadmin"],
+    format: "inperson",
+    cost: "mid",
+    costDisplay: "From ~$795 USD/course",
+    costClass: "cost-mid",
+    level: "intermediate",
+    levelDisplay: "All Levels",
+    credential: "CompTIA, ISACA, GIAC-prep",
+    location: "Ottawa, ON + other Canadian cities",
+    duration: "3–5 days per course",
+    accent: "#f59e0b",
+    badges: ["badge-cyber","badge-sysadmin","badge-inperson","badge-cert"],
+    badgeLabels: ["Cybersecurity","Sysadmin","In-Person","Certification"],
+    desc: "Ottawa location regularly serves federal government and public sector cybersecurity teams. Private on-site team training available across Canada.",
+    highlights: [
+      "Ottawa office: primary provider for federal government and public sector security teams",
+      "All AI Cybersecurity and SecAI+ courses available in in-person classroom format",
+      "Private team training can be delivered on-site anywhere in Canada",
+      "Instructor-led with hands-on labs; Guaranteed-to-Run scheduling",
+      "70+ cybersecurity courses in catalog; 100% satisfaction guarantee",
+      "After-course instructor coaching included with every course"
+    ],
+    prereqs: "Varies by course — foundational networking and cybersecurity knowledge recommended.",
+    upcoming: "Ongoing schedule — check learningtree.ca for in-person session availability in Ottawa",
+    url: "learningtree.ca",
+    search: "learning tree ottawa canada in-person classroom cybersecurity sysadmin team training government"
+  },
+  {
+    id: 10,
+    title: "SANS SANSFIRE & Cyber Defense Initiative 2026",
+    provider: "SANS Institute",
+    categories: ["cyber"],
+    format: "inperson",
+    cost: "high",
+    costDisplay: "~$7,000–$10,500 USD",
+    costClass: "cost-high",
+    level: "advanced",
+    levelDisplay: "Advanced",
+    credential: "GIAC Certifications",
+    location: "Washington, D.C. (US — near Canada)",
+    duration: "5–6 days immersive",
+    accent: "#f472b6",
+    badges: ["badge-cyber","badge-inperson","badge-cert"],
+    badgeLabels: ["Cybersecurity","In-Person (US)","GIAC Cert"],
+    desc: "Premier global cybersecurity training events. Best-in-class practitioners, NetWars competitions, and GIAC certifications. No Canada-specific events — travel from Canada required.",
+    highlights: [
+      "30+ course tracks from foundational to cutting-edge AI and cloud security",
+      "SANSFIRE 2026: Early bird code EarlyBirdSF saves $750 USD (pay by May 7, 2026)",
+      "CDI 2026: Early bird code EarlyBirdNA saves $900 USD (pay by May 27, 2026)",
+      "NetWars competitions (Core + Offensive Operations) — earn challenge coins",
+      "Delta Air Lines travel discounts available: code NM4QS",
+      "Exclusive in-person networking, faculty access, and after-hours community events"
+    ],
+    prereqs: "Varies by course. Most AI/security courses require 2–5 years cybersecurity experience.",
+    upcoming: "SANSFIRE 2026: Washington D.C. | CDI 2026: Washington D.C. | Check sans.org for exact dates",
+    url: "sans.org/cyber-security-training-events",
+    search: "SANS sansfire cyber defense initiative 2026 GIAC in-person washington dc advanced cybersecurity"
+  },
+  {
+    id: 11,
+    title: "SAP Learning — Official AI, Joule & Agent Courses",
+    provider: "SAP (Official)",
+    categories: ["agents"],
+    format: "remote",
+    cost: "free",
+    costDisplay: "Free (most courses)",
+    costClass: "cost-free",
+    level: "intro",
+    levelDisplay: "Intro–Intermediate",
+    credential: "SAP Learning Badge",
+    location: "Online",
+    duration: "Self-paced + free live sessions",
+    accent: "#a78bfa",
+    badges: ["badge-sap","badge-remote","badge-free"],
+    badgeLabels: ["SAP","Remote","Free"],
+    desc: "Start here. Official SAP training for Joule, SAP AI Core, Generative AI Hub, and Joule Studio Agent Builder. Free live sessions available. Joule agents run at no cost until May 31, 2026.",
+    highlights: [
+      "Joule Studio: Create Joule Skills and Agents Without Coding (live session)",
+      "Getting Started with Generative AI Hub on SAP AI Core (multiple global live sessions)",
+      "ABAP AI: Capabilities in SAP Joule for Developers — CodeJam format",
+      "Build AI Securely: Governance, Compliance, Lifecycle Management (April 9, 2026)",
+      "Boosting AI-driven Business Transformation with Joule Agents (self-paced)",
+      "Joule Studio Agent Builder: connect agents to MCP servers, SAP and non-SAP systems, SAP Knowledge Graph"
+    ],
+    prereqs: "No prerequisites for foundational courses. SAP BTP familiarity helpful for technical sessions.",
+    upcoming: "Multiple live sessions ongoing globally — check learning.sap.com for calendar",
+    url: "learning.sap.com/artificial-intelligence",
+    search: "SAP learning official joule agents AI core BTP generative hub free live sessions CodeJam"
+  },
+  {
+    id: 12,
+    title: "SAP BTP Generative AI & Agentic AI — Full Stack",
+    provider: "Anubhav Trainings",
+    categories: ["agents"],
+    format: "remote",
+    cost: "low",
+    costDisplay: "~$50–$200 USD",
+    costClass: "cost-low",
+    level: "advanced",
+    levelDisplay: "Advanced",
+    credential: "Self-Certificate",
+    location: "Online (Self-Paced)",
+    duration: "Extensive self-paced; multiple modules",
+    accent: "#a78bfa",
+    badges: ["badge-sap","badge-remote"],
+    badgeLabels: ["SAP","Remote"],
+    desc: "Best deep-technical course for SAP BTP developers. Covers the full pipeline from Python fundamentals to production-grade agentic AI — LangChain, LangGraph, RAG, HANA Vector Engine, and live S/4HANA integration.",
+    highlights: [
+      "Python fundamentals → enterprise-grade agentic AI on SAP BTP end-to-end",
+      "LangChain, LangGraph, RAG with HANA Cloud Vector Engine",
+      "SAP AI Core and AI Launchpad: deploy, monitor, and govern AI workloads",
+      "Integration with SAP S/4HANA via OData APIs; CAP applications with LLM plugins",
+      "Field agent bots executing business transactions autonomously",
+      "MTA packaging, Cloud Foundry deployment, security with app routers, governance frameworks",
+      "Works with GPT, Claude, Llama through SAP Generative AI Hub"
+    ],
+    prereqs: "Python basics strongly recommended. SAP BTP or S/4HANA familiarity helpful.",
+    upcoming: "Available now — self-paced",
+    url: "anubhavtrainings.com/btp-gen-ai-training",
+    search: "SAP BTP generative AI agentic LangChain LangGraph RAG HANA vector S4HANA developer advanced"
+  },
+  {
+    id: 13,
+    title: "SAP AI Masterclass — Joule, Generative AI, Agentic AI",
+    provider: "Udemy (Zequance AI)",
+    categories: ["agents"],
+    format: "remote",
+    cost: "low",
+    costDisplay: "~$50–$150 USD (use coupon AICAREER for 30% off)",
+    costClass: "cost-low",
+    level: "intermediate",
+    levelDisplay: "Intermediate–Advanced",
+    credential: "C_AIG 2026 Exam Prep",
+    location: "Online (Self-Paced)",
+    duration: "Video course + capstone project",
+    accent: "#a78bfa",
+    badges: ["badge-sap","badge-remote","badge-cert"],
+    badgeLabels: ["SAP","Remote","C_AIG Prep"],
+    desc: "Broad architecture coverage across the full SAP AI ecosystem. Covers Joule Studio agents, Generative AI Hub, SAP Build Platform, RAG with HANA, and functional AI use cases in Finance, Supply Chain, and HR.",
+    highlights: [
+      "SAP Joule Copilot + Joule Studio: building and orchestrating intelligent agents, multi-step automations",
+      "RAG using HANA Cloud Vector Engine + prompt engineering + model management",
+      "SAP AI Core, AI Launchpad, SAP Build Platform low-code and pro-code AI solutions",
+      "SAP Analytics Cloud: predictive analytics, Smart Predict, forecasting, influencer analysis",
+      "Functional AI: Finance, Supply Chain, HR, Procurement, and Sales use cases",
+      "Governance, ethics, and responsible AI frameworks for enterprise AI",
+      "Includes structured C_AIG 2026 certification preparation throughout"
+    ],
+    prereqs: "SAP ecosystem familiarity (S/4HANA, BTP, or SuccessFactors concepts) is helpful but not required.",
+    upcoming: "Available now — self-paced. 30% off with coupon: AICAREER",
+    url: "udemy.com/course/sap-ai-training",
+    search: "SAP AI masterclass joule generative agentic BTP supply chain finance HR udemy certification"
+  },
+  {
+    id: 14,
+    title: "SAP Generative AI Developer Certification — C_AIG 2026",
+    provider: "SAP Training & Certification",
+    categories: ["agents"],
+    format: "remote",
+    cost: "mid",
+    costDisplay: "~$500–$800 USD (exam fee)",
+    costClass: "cost-mid",
+    level: "advanced",
+    levelDisplay: "All SAP Roles",
+    credential: "SAP Certified — Gen AI Developer",
+    location: "Online Exam",
+    duration: "Exam (prepare via SAP Learning or Udemy courses)",
+    accent: "#f472b6",
+    badges: ["badge-sap","badge-remote","badge-cert"],
+    badgeLabels: ["SAP","Remote","Certification"],
+    desc: "The SAP-specific credential for AI developers and architects. 2026 format is system-based (practical), not purely theoretical — requires real working knowledge of Joule Studio, AI Core, and BTP.",
+    highlights: [
+      "Covers: SAP Business AI, SAP Joule, Generative AI Hub, SAP AI Core, AI Launchpad, BTP integration",
+      "2026 format: system-based evaluation — practical skills required, not just theory",
+      "Strong competitive differentiator as SAP customers increasingly require AI-proficient consultants",
+      "Available to functional consultants, developers, architects, and project managers",
+      "Recommended prep: SAP AI Masterclass (Udemy) + SAP Learning official courses",
+      "SAP-ABAP-1 foundation model (trained on 250M+ lines of ABAP) now in scope for 2026"
+    ],
+    prereqs: "SAP ecosystem experience recommended. Pair with the Anubhav BTP course or SAP AI Masterclass for preparation.",
+    upcoming: "Exam available year-round via Pearson VUE — register at training.sap.com",
+    url: "training.sap.com",
+    search: "SAP C_AIG certification 2026 generative AI developer exam joule BTP official credential"
+  },
+  {
+    id: 15,
+    title: "The Complete SAP Joule Course — From Zero to AI-Powered",
+    provider: "Udemy (SAP AI Solutions Architect)",
+    categories: ["agents"],
+    format: "remote",
+    cost: "low",
+    costDisplay: "~$50–$150 USD",
+    costClass: "cost-low",
+    level: "intermediate",
+    levelDisplay: "Intermediate",
+    credential: "Self-Certificate",
+    location: "Online (Self-Paced)",
+    duration: "Self-paced video course",
+    accent: "#a78bfa",
+    badges: ["badge-sap","badge-remote"],
+    badgeLabels: ["SAP","Remote"],
+    desc: "Implementation-focused Joule course taught by a Senior SAP AI Solutions Architect with 10+ years of SAP experience. Covers setup, configuration, security, and real-world automation use cases.",
+    highlights: [
+      "Joule setup, configuration, automation, security, and real-world use cases",
+      "Connects Joule across S/4HANA, SuccessFactors, Ariba, Concur, and SAP BTP",
+      "AI-powered recommendations, predictive analytics, and data-driven decision-making",
+      "Natural language interface implementation for SAP workflows",
+      "Taught by Senior SAP AI Solutions Architect with 10+ years SAP implementation experience",
+      "By 2027, ~70% of SAP customers expected to adopt Joule — skills gap is significant"
+    ],
+    prereqs: "Basic understanding of SAP applications (e.g., S/4HANA, SuccessFactors, Ariba) recommended.",
+    upcoming: "Available now — self-paced",
+    url: "udemy.com/course/sap-joule-training",
+    search: "SAP joule course implementation configuration S4HANA SuccessFactors Ariba AI copilot udemy"
+  },
+  {
+    id: 16,
+    title: "AI Engineer: Complete Agentic Track + MCP Course",
+    provider: "Udemy",
+    categories: ["agents","sysadmin"],
+    format: "remote",
+    cost: "low",
+    costDisplay: "~$50–$150 USD",
+    costClass: "cost-low",
+    level: "intermediate",
+    levelDisplay: "Intermediate–Advanced",
+    credential: "Self-Certificate",
+    location: "Online (Self-Paced)",
+    duration: "6-week intensive structure",
+    accent: "#a78bfa",
+    badges: ["badge-agents","badge-remote"],
+    badgeLabels: ["AI Agents","Remote"],
+    desc: "Essential for anyone building agents that span SAP and non-SAP systems. Week 6 is entirely dedicated to MCP (Model Context Protocol) — the standard for connecting agents to enterprise tools and APIs.",
+    highlights: [
+      "Week-by-week: LLM foundations → OpenAI Agents SDK → CrewAI → LangGraph → AutoGen → MCP",
+      "Full week dedicated to MCP (Model Context Protocol) — connects agents to any enterprise system",
+      "MCP is how Joule Studio and custom agents connect to non-SAP production systems",
+      "Multi-agent systems with specialized roles (researcher, analyst, writer) working in parallel",
+      "Production-ready agentic workflows — not just demos",
+      "Emphasis on deployable, real-world applicable systems throughout"
+    ],
+    prereqs: "Python programming experience required. Some LLM/AI familiarity helpful.",
+    upcoming: "Available now — self-paced",
+    url: "udemy.com/course/the-complete-agentic-ai-engineering-course",
+    search: "agentic AI engineer MCP model context protocol LangGraph CrewAI AutoGen agents enterprise integration"
+  },
+  {
+    id: 17,
+    title: "Agentic AI Engineering Masterclass 2026",
+    provider: "Udemy",
+    categories: ["agents"],
+    format: "remote",
+    cost: "low",
+    costDisplay: "~$50 USD",
+    costClass: "cost-low",
+    level: "intermediate",
+    levelDisplay: "Intermediate",
+    credential: "Self-Certificate",
+    location: "Online (Self-Paced)",
+    duration: "Self-paced; project-based",
+    accent: "#a78bfa",
+    badges: ["badge-agents","badge-remote"],
+    badgeLabels: ["AI Agents","Remote"],
+    desc: "Multi-agent systems design with memory, guardrails, and orchestration. Covers specialized agent teams, manager functions, LangGraph workflows, and OpenAI Agents SDK for production use.",
+    highlights: [
+      "Design, build, and deploy next-generation AI agents with persistent memory and guardrails",
+      "Multi-agent systems: specialized agents (researcher, analyst, writer) working in parallel with context passing",
+      "Manager orchestration functions; ethical and domain boundary enforcement via guardrails",
+      "OpenAI Agents SDK, LangGraph, CrewAI multi-agent pipeline design",
+      "Test AI agent booking tool, build Gradio interfaces, integrate LangGraph streaming workflows",
+      "CrewAI data science team automation: regression workflow, data cleaning, feature engineering"
+    ],
+    prereqs: "Python programming experience. Familiarity with LLM APIs (OpenAI, etc.) recommended.",
+    upcoming: "Available now — self-paced",
+    url: "udemy.com/course/become-an-ai-agent-workflow-automation-engineer",
+    search: "agentic AI masterclass multi-agent LangGraph CrewAI OpenAI agents SDK memory guardrails 2026"
+  }
+];
+
+const PATHS = {
+  "sap-admin": {
+    title: "📋 SAP Admin / Functional Consultant",
+    steps: [
+      { label: "Step 1", text: "<strong>SAP Learning Official (Free)</strong> — Start with free Joule sessions: 'Getting Started with Generative AI Hub' and 'Joule Studio: Create Joule Skills and Agents Without Coding'", ids:[11] },
+      { label: "Step 2", text: "<strong>The Complete SAP Joule Course (Udemy, ~$50–$150 USD)</strong> — Configuration and implementation depth; connect Joule across S/4HANA, SuccessFactors, Ariba", ids:[15] },
+      { label: "Step 3", text: "<strong>SAP AI Masterclass (Udemy, ~$50–$150 USD)</strong> — Broad architecture context across the full SAP AI ecosystem; integrated C_AIG exam prep", ids:[13] },
+      { label: "Step 4", text: "<strong>C_AIG 2026 Certification (~$500–$800 USD)</strong> — Career differentiator; system-based exam requires real working knowledge of Joule Studio and AI Core", ids:[14] }
+    ]
+  },
+  "sap-dev": {
+    title: "⚙️ SAP Developer / BTP Engineer",
+    steps: [
+      { label: "Step 1", text: "<strong>SAP Learning Official (Free)</strong> — 'Getting Started with Generative AI Hub on SAP AI Core' live session + ABAP AI CodeJam", ids:[11] },
+      { label: "Step 2", text: "<strong>SAP BTP Gen AI — Anubhav Trainings (~$50–$200 USD)</strong> — Full stack: Python → LangChain → LangGraph → RAG with HANA → agentic AI pipelines → S/4HANA integration", ids:[12] },
+      { label: "Step 3", text: "<strong>AI Engineer: Agentic + MCP Course (~$50–$150 USD)</strong> — MCP for connecting agents to non-SAP production systems and third-party APIs", ids:[16] },
+      { label: "Step 4", text: "<strong>SAP AI Masterclass (Udemy)</strong> — Architecture coverage and C_AIG 2026 certification prep", ids:[13] },
+      { label: "Step 5", text: "<strong>C_AIG 2026 Certification</strong> — Validate your practical SAP AI engineering skills", ids:[14] }
+    ]
+  },
+  "cybersec": {
+    title: "🛡️ Cybersecurity Professional",
+    steps: [
+      { label: "Step 1", text: "<strong>CCCS Learning Hub (Free)</strong> — Free, Canadian-threat-focused baseline; DevSecOps course aligns with Canadian compliance requirements", ids:[4] },
+      { label: "Step 2", text: "<strong>Fortinet NSE (Free)</strong> — AI-driven SecOps and zero-trust fundamentals; strong network security foundation", ids:[5] },
+      { label: "Step 3", text: "<strong>UBC AI Skills Accelerator — Cybersecurity Track ($1,425 for 3 micro-courses)</strong> — Cybersecurity 1 + 2 + 3: from intro through real-time threat detection to advanced AI defence", ids:[1] },
+      { label: "Step 4", text: "<strong>CompTIA SecAI+ via Learning Tree (~$1,000–$2,000 USD)</strong> — First global vendor-neutral AI security certification; targets experienced cybersecurity professionals", ids:[2] },
+      { label: "Step 5", text: "<strong>SANS SEC595 (~$7,000–$10,000 USD) — when budget allows</strong> — GIAC GMLE is the gold-standard credential globally recognized in enterprise and government", ids:[3] }
+    ]
+  },
+  "sysadmin": {
+    title: "🖥️ System Administrator",
+    steps: [
+      { label: "Step 1", text: "<strong>Fortinet NSE (Free)</strong> — AI-driven network operations, adaptive cloud security; structured self-paced tracks from entry to expert", ids:[5] },
+      { label: "Step 2", text: "<strong>CCCS Learning Hub (Free)</strong> — DevSecOps fundamentals aligned with Canadian infrastructure standards", ids:[4] },
+      { label: "Step 3", text: "<strong>UBC AI Skills Accelerator — Technical Pathway</strong> — Purpose-built for IT infrastructure specialists; AI implementation, data literacy, and workflow automation", ids:[1] },
+      { label: "Step 4", text: "<strong>University of Waterloo AI Certificate (Technical Track)</strong> — Build and deploy production-grade AI systems using modern frameworks and cloud tools", ids:[6] },
+      { label: "Step 5", text: "<strong>AI Engineer: Agentic + MCP Course</strong> — Connect AI agents to production systems and internal APIs; essential for modern infrastructure automation", ids:[16] }
+    ]
+  },
+  "ops": {
+    title: "🏭 Production / Operations Manager",
+    steps: [
+      { label: "Step 1", text: "<strong>Agentic AI Engineering Masterclass (~$50 USD)</strong> — Multi-agent design and orchestration fundamentals; how agents reason, plan, and execute tasks", ids:[17] },
+      { label: "Step 2", text: "<strong>AI Engineer: Agentic + MCP Course (~$50–$150 USD)</strong> — MCP for connecting agents to industrial/production APIs; enables agents to span SAP and MES/SCADA systems", ids:[16] },
+      { label: "Step 3", text: "<strong>SAP Learning Official (Free)</strong> — If using SAP: Joule Studio for building custom agents for manufacturing quality control, production order management, and financial close", ids:[11] },
+      { label: "Step 4", text: "<strong>Apply to your stack</strong> — LangGraph intensive (self-directed via documentation) then integrate with Oracle, MES, SCADA, or custom production systems via OData or REST APIs", ids:[] }
+    ]
+  },
+  "architect": {
+    title: "🏗️ IT Architect / Team Lead",
+    steps: [
+      { label: "Step 1", text: "<strong>SAP AI Masterclass (Udemy)</strong> — Broad architecture overview across the full SAP AI ecosystem: Joule, AI Core, BTP, governance frameworks", ids:[13] },
+      { label: "Step 2", text: "<strong>Agentic AI Engineering Masterclass</strong> — Multi-agent systems, orchestration patterns, guardrails, and production deployment strategies", ids:[17] },
+      { label: "Step 3", text: "<strong>UBC AI Skills Accelerator — Governance & Enterprise Integration Tracks</strong> — Strategic decision-making, AI governance, and enterprise AI architecture", ids:[1] },
+      { label: "Step 4", text: "<strong>C_AIG 2026 Certification</strong> — SAP-specific credential to validate architectural knowledge of the SAP AI ecosystem", ids:[14] },
+      { label: "Step 5", text: "<strong>CompTIA SecAI+ (Learning Tree)</strong> — Security governance for AI systems; AI risk management and audit frameworks", ids:[2] }
+    ]
+  }
+};
+
+let filters = { cat: 'all', fmt: 'all', cost: 'all', level: 'all' };
+
+function renderCards() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  PROGRAMS.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.id = p.id;
+    card.dataset.cats = p.categories.join(',');
+    card.dataset.fmt = p.format;
+    card.dataset.cost = p.cost;
+    card.dataset.level = p.level;
+    card.dataset.search = p.search.toLowerCase();
+
+    const badgesHTML = p.badges.map((b,i) => `<span class="badge ${b}">${p.badgeLabels[i]}</span>`).join('');
+    const highlightsHTML = p.highlights.map(h => `<li>${h}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="card-accent" style="background:linear-gradient(90deg,${p.accent},${p.accent}88)"></div>
+      <div class="card-head">
+        <div class="card-top">
+          <div class="card-num">#${String(p.id).padStart(2,'0')}</div>
+          <div class="card-badges">${badgesHTML}</div>
+        </div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-provider">${p.provider}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-meta">
+          <div class="meta-item">
+            <div class="meta-label">Cost</div>
+            <div class="meta-value ${p.costClass}">${p.costDisplay}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Format</div>
+            <div class="meta-value">${p.location}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Duration</div>
+            <div class="meta-value">${p.duration}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Credential</div>
+            <div class="meta-value">${p.credential}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-toggle" onclick="toggleCard(this)">
+        <span>Details, highlights & prerequisites</span>
+        <span class="toggle-arrow">›</span>
+      </div>
+      <div class="card-details">
+        <div class="details-section">
+          <div class="details-heading">What You'll Learn</div>
+          <ul class="detail-list">${highlightsHTML}</ul>
+        </div>
+        <div class="details-section">
+          <div class="details-heading">Prerequisites</div>
+          <div class="prereq-box"><strong>Prereqs:</strong> ${p.prereqs}</div>
+        </div>
+        <div class="details-section">
+          <div class="details-heading">Upcoming / Scheduling</div>
+          <div class="prereq-box">${p.upcoming}</div>
+        </div>
+        <a class="url-link" href="https://${p.url}" target="_blank" rel="noopener">↗ ${p.url}</a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function toggleCard(toggleEl) {
+  const details = toggleEl.nextElementSibling;
+  const arrow = toggleEl.querySelector('.toggle-arrow');
+  const isOpen = details.classList.contains('open');
+  details.classList.toggle('open', !isOpen);
+  arrow.style.transform = isOpen ? '' : 'rotate(90deg)';
+}
+
+function setFilter(chip) {
+  const group = chip.dataset.group;
+  const value = chip.dataset.value;
+  document.querySelectorAll(`[data-group="${group}"]`).forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  filters[group] = value;
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  let visible = 0;
+  document.querySelectorAll('.card').forEach(card => {
+    const cats = card.dataset.cats.split(',');
+    const fmt = card.dataset.fmt;
+    const cost = card.dataset.cost;
+    const level = card.dataset.level;
+    const search = card.dataset.search;
+
+    const catOk = filters.cat === 'all' || cats.includes(filters.cat);
+    const fmtOk = filters.fmt === 'all' || fmt === filters.fmt || fmt === 'both';
+    const costOk = filters.cost === 'all' || cost === filters.cost;
+    const levelOk = filters.level === 'all' || level === filters.level;
+    const searchOk = !q || search.includes(q) || card.querySelector('.card-title').textContent.toLowerCase().includes(q) || card.querySelector('.card-provider').textContent.toLowerCase().includes(q);
+
+    const show = catOk && fmtOk && costOk && levelOk && searchOk;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+
+  document.getElementById('resultLabel').innerHTML = `Showing <strong>${visible}</strong> of ${PROGRAMS.length} programs`;
+  document.getElementById('emptyState').classList.toggle('visible', visible === 0);
+}
+
+function clearAll() {
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  document.querySelector('[data-group="cat"][data-value="all"]').classList.add('active');
+  document.querySelector('[data-group="fmt"][data-value="all"]').classList.add('active');
+  document.querySelector('[data-group="cost"][data-value="all"]').classList.add('active');
+  document.querySelector('[data-group="level"][data-value="all"]').classList.add('active');
+  filters = { cat: 'all', fmt: 'all', cost: 'all', level: 'all' };
+  applyFilters();
+}
+
+function showPath(role) {
+  const path = PATHS[role];
+  if (!path) return;
+
+  document.querySelectorAll('.finder-btn').forEach(b => b.classList.remove('selected'));
+  event.target.classList.add('selected');
+
+  document.getElementById('pathTitle').textContent = path.title;
+  document.getElementById('pathSteps').innerHTML = path.steps.map(s =>
+    `<div class="path-step"><span class="step-num">${s.label}</span><span class="step-text">${s.text}</span></div>`
+  ).join('');
+
+  const result = document.getElementById('finderResult');
+  result.classList.remove('visible');
+  void result.offsetWidth;
+  result.classList.add('visible');
+}
+
+function resetFinder() {
+  document.getElementById('finderResult').classList.remove('visible');
+  document.querySelectorAll('.finder-btn').forEach(b => b.classList.remove('selected'));
+}
+
+renderCards();
+</script>
+</body>
+</html>
