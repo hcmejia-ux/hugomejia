@@ -1,0 +1,426 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Gym Cheat Sheet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky day tabs over one training day at a time; each exercise is a block, supersets share one framed card. */
+:root {
+  --bg: #ECEFF0;
+  --surface: #FFFFFF;
+  --soft: #F3F5F6;
+  --ink: #13171A;
+  --muted: #566068;
+  --line: #D3D9DC;
+  --accent: #F0A500;
+  --on-accent: #1A1300;
+  --link: #8A5A00;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1114;
+    --surface: #171B1F;
+    --soft: #1D2227;
+    --ink: #EDF0F2;
+    --muted: #9AA5AD;
+    --line: #2A3036;
+    --accent: #F5B400;
+    --on-accent: #1A1300;
+    --link: #F5B400;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1114;
+  --surface: #171B1F;
+  --soft: #1D2227;
+  --ink: #EDF0F2;
+  --muted: #9AA5AD;
+  --line: #2A3036;
+  --accent: #F5B400;
+  --on-accent: #1A1300;
+  --link: #F5B400;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.5 var(--font-body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+
+.wrap {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bar .wrap { padding-block: 12px 0; }
+h1 { margin: 0; font: 700 26px/1.1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; }
+.sub { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+
+.tabs { display: flex; gap: 8px; overflow-x: auto; padding-block: 12px; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 0 0 auto; min-width: 68px; min-height: 48px; padding: 6px 12px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink);
+  font: inherit; text-align: left; cursor: pointer;
+}
+.tab b { display: block; font: 700 17px/1.1 var(--font-display); letter-spacing: 0.05em; text-transform: uppercase; }
+.tab span { display: block; font-size: 12px; color: var(--muted); }
+.tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.tab[aria-selected="true"] span { color: var(--on-accent); }
+.tab:focus-visible, .set:focus-visible, .demo:focus-visible, .reset:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+main.wrap { padding-block: 20px 56px; display: grid; gap: 14px; }
+
+.dayhead { display: grid; gap: 4px; padding-bottom: 2px; }
+.kicker { font: 600 14px/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+h2 { margin: 0; font: 700 44px/1 var(--font-display); letter-spacing: 0.01em; text-transform: uppercase; text-wrap: balance; }
+.units { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+
+.strip { display: flex; gap: 12px; align-items: baseline; padding: 10px 12px; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; font-size: 14px; }
+.strip b { flex: 0 0 auto; min-width: 58px; font: 700 13px/1.2 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.strip span { min-width: 0; }
+
+.group { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.glabel { padding: 8px 14px; font: 700 13px/1.2 var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; }
+.glabel small { font: 500 12px var(--font-body); letter-spacing: 0; text-transform: none; opacity: 0.85; margin-left: 6px; }
+.group.ss .glabel { background: var(--accent); color: var(--on-accent); }
+.group.st .glabel { background: var(--soft); color: var(--muted); border-bottom: 1px solid var(--line); }
+
+.ex { display: grid; gap: 12px; padding: 14px; }
+.then { display: flex; align-items: center; gap: 10px; padding: 0 14px; font: 600 12px/1 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.then::before, .then::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+.ex-top { display: flex; gap: 10px; align-items: baseline; }
+.tag { flex: 0 0 auto; padding: 2px 8px; border-radius: 6px; background: var(--ink); color: var(--bg); font: 700 14px/1.4 var(--font-display); letter-spacing: 0.06em; }
+h3 { margin: 0; min-width: 0; font: 700 23px/1.15 var(--font-display); text-wrap: balance; }
+
+.nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.num { min-width: 0; padding: 8px 10px; background: var(--soft); border-radius: 10px; }
+.num small { display: block; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.num strong { display: block; font: 700 22px/1.15 var(--font-display); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.num em { font-style: normal; font: 500 12px var(--font-body); color: var(--muted); }
+
+.cue { margin: 0; font-size: 15px; color: var(--muted); }
+
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.demo {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px;
+  border: 1.5px solid var(--link); border-radius: 10px; color: var(--link); font-weight: 600; text-decoration: none;
+}
+.demo::after { content: "\2197"; }
+
+.sets { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sets-label { margin-right: 4px; font-size: 12px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.set {
+  width: 44px; height: 44px; border: 2px solid var(--line); border-radius: 50%;
+  background: var(--surface); color: var(--ink); font: 700 17px/1 var(--font-display); cursor: pointer;
+}
+.set[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+.reset { justify-self: start; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--muted); font: 600 14px var(--font-body); cursor: pointer; }
+
+.prose { display: grid; gap: 14px; }
+.prose section { padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.prose h3 { margin-bottom: 8px; font-size: 24px; }
+.prose p { margin: 0 0 10px; max-width: 65ch; }
+.prose p:last-child { margin-bottom: 0; }
+.prose ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 65ch; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .tab, .set { transition: background-color 0.15s, border-color 0.15s; }
+}
+@media (min-width: 560px) {
+  h2 { font-size: 56px; }
+  .ex { padding: 18px; }
+}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <h1>Gym Cheat Sheet</h1>
+    <p class="sub">12 weeks &middot; 4 days a week &middot; 45 minutes</p>
+    <nav class="tabs" id="tabs" aria-label="Training days"></nav>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+
+<script>
+(function () {
+  var KEY = "gym-cheat-sheet-sets-v1";
+
+  var DAYS = [
+    {
+      id: "mon", tab: "Mon", name: "Upper A", full: "Monday",
+      warm: "5 min on the bike, then 1–2 light sets of the first exercise.",
+      finish: "10 min treadmill walk at 8–12% incline, brisk but conversational.",
+      groups: [
+        { type: "ss", label: "Superset A", items: [
+          { tag: "A1", name: "Machine chest press", sets: 3, reps: "8–10", start: "70–90", goal: "100–130",
+            cue: "Back flat on the pad, handles at chest height, don’t lock your elbows. Same Matrix machine as the incline and shoulder press: move the back pad to switch.",
+            links: [["Watch demo", "https://breakingmuscle.com/chest-press-machine/"]] },
+          { tag: "A2", name: "Standing or kneeling cable pulldown", sets: 3, reps: "8–10", start: "60–80", goal: "90–110",
+            cue: "Lat bar, pulleys set high. Lean back slightly, pull the bar to your upper chest, elbows down and back.",
+            links: [["Watch demo", "https://brookbushinstitute.com/videos/kneeling-cable-pull-down-lat-pulldown-progression"]] }
+        ]},
+        { type: "ss", label: "Superset B", items: [
+          { tag: "B1", name: "Incline dumbbell press", sets: 3, reps: "10", start: "25–35", goal: "40–50", unit: "lb each",
+            cue: "Bench at about 45°. Keep your elbows about 45° from your body.",
+            links: [["Watch demo", "https://fitfatherproject.com/incline-dumbbell-press"]] },
+          { tag: "B2", name: "Standing cable row", sets: 3, reps: "10–12", start: "50–70", goal: "80–100",
+            cue: "Low pulley, split stance. Hips and knees slightly bent, back straight, pull the handle to your waist.",
+            links: [["Watch demo", "https://livestrong.com/article/13769118-standing-cable-row"]] }
+        ]},
+        { type: "ss", label: "Superset C", items: [
+          { tag: "C1", name: "Rope triceps pushdown", sets: 2, reps: "12", start: "30–40", goal: "50–60",
+            cue: "Elbows pinned to your sides. Only the forearms move.",
+            links: [["Watch demo", "https://exercise.com/exercises/rope-tricep-pushdown"]] },
+          { tag: "C2", name: "Dumbbell curl", sets: 2, reps: "12", start: "15–25", goal: "25–35", unit: "lb each",
+            cue: "Strict, no swinging, lower slowly.",
+            links: [["Watch demo", "https://barbell-logic.com/gym-shorts-dumbbell-curl/"]] }
+        ]}
+      ]
+    },
+    {
+      id: "tue", tab: "Tue", name: "Lower A", full: "Tuesday",
+      warm: "5 min on the bike, plus one light set of the goblet squat.",
+      finish: "10 min elliptical or bike intervals: 30 s hard, 90 s easy, 5 rounds.",
+      groups: [
+        { type: "st", label: "Straight sets", sub: "rest after every set", items: [
+          { name: "Goblet squat", sets: 4, reps: "10", start: "30–40", goal: "50", unit: "lb, one dumbbell",
+            cue: "Hold the dumbbell at your chest, sit back and down, push through your heels.",
+            links: [["Watch demo", "https://blog.o2fitnessclubs.com/goblet-squats"]] }
+        ]},
+        { type: "ss", label: "Superset B", items: [
+          { tag: "B1", name: "Dumbbell Romanian deadlift", sets: 3, reps: "10", start: "25–35", goal: "45–50", unit: "lb each",
+            cue: "Hips back, soft knees, flat back, dumbbells close to your legs.",
+            links: [["Watch demo", "https://fitbod.me/exercises/dumbbell-romanian-deadlift"]] },
+          { tag: "B2", name: "Cable Pallof press", sets: 3, reps: "10 per side", start: "10–20", goal: "25–35",
+            cue: "Stand sideways to the cable, press straight out, don’t let it twist you. Prefer a plank? Do 3 holds of 20–30 s.",
+            links: [["Pallof demo", "https://fitbod.me/exercises/pallof-press"], ["Plank demo", "https://physicalliving.com/how-to-do-a-plank-proper-plank-form/"]] }
+        ]},
+        { type: "st", label: "Straight sets", sub: "same machine as the leg curl", items: [
+          { name: "Leg extension", sets: 3, reps: "12", start: "50–70", goal: "90–110",
+            cue: "Control the lowering, pause at the top, don’t slam the stack.",
+            links: [["Watch demo", "https://fitbod.me/exercises/leg-extension"]] }
+        ]},
+        { type: "st", label: "Straight sets", sub: "rest after every set", items: [
+          { name: "Seated leg curl", sets: 3, reps: "12", start: "40–60", goal: "70–90",
+            cue: "Pad just above your heels, curl smoothly, no momentum.",
+            links: [["Watch demo", "https://ascendancyfitnessgym.com/equipment/seated-leg-curl.html"]] }
+        ]}
+      ]
+    },
+    {
+      id: "thu", tab: "Thu", name: "Upper B", full: "Thursday",
+      warm: "5 min on the elliptical, plus one light set of the shoulder press.",
+      finish: "10 min treadmill walk at 8–12% incline, brisk but conversational.",
+      groups: [
+        { type: "ss", label: "Superset A", items: [
+          { tag: "A1", name: "Machine shoulder press", sets: 3, reps: "8–10", start: "40–60", goal: "70–90",
+            cue: "Back pad touching head, shoulders and hips. Elbows slightly in front of your body.",
+            links: [["Watch demo", "https://fitbod.me/exercises/machine-shoulder-press"]] },
+          { tag: "A2", name: "Pull-up or TRX row", sets: 3, reps: "6–10 clean reps", start: "Bodyweight", goal: "More reps", unit: "",
+            cue: "No clean pull-up yet? Use the TRX row: body in a straight line, walk your feet forward to make it harder.",
+            links: [["Pull-up demo", "https://fitbod.me/exercises/pull-up"], ["TRX row demo", "https://www.fitfatherproject.com/trx-row"]] }
+        ]},
+        { type: "ss", label: "Superset B", items: [
+          { tag: "B1", name: "Dumbbell bench press", sets: 3, reps: "10", start: "30–40", goal: "45–50", unit: "lb each",
+            cue: "Feet flat, dumbbells over your shoulders at the top, don’t flare your elbows.",
+            links: [["Watch demo", "https://www.fitfatherproject.com/dumbbell-bench-press/"]] },
+          { tag: "B2", name: "Cable face pull", sets: 3, reps: "12–15", start: "20–30", goal: "40–50",
+            cue: "Rope at face height, pull toward your forehead, elbows high.",
+            links: [["Watch demo", "https://fitbod.me/exercises/cable-face-pull"]] }
+        ]},
+        { type: "ss", label: "Superset C", items: [
+          { tag: "C1", name: "Cable lateral raise", sets: 2, reps: "12 per arm", start: "5–10", goal: "15–20",
+            cue: "Raise to shoulder height only, slow and controlled.",
+            links: [["Watch demo", "https://www.healthline.com/nutrition/cable-lateral-raise"]] },
+          { tag: "C2", name: "Cable curl", sets: 2, reps: "12", start: "25–35", goal: "45–55",
+            cue: "Upper arms stay against your sides, squeeze at the top.",
+            links: [["Watch demo", "https://www.fitfatherproject.com/cable-bicep-curl/"]] }
+        ]}
+      ]
+    },
+    {
+      id: "fri", tab: "Fri", name: "Lower B", full: "Friday",
+      warm: "5 min on the bike, plus one light set of split squats.",
+      finish: "10 min elliptical or bike intervals: 30 s hard, 90 s easy, 5 rounds.",
+      groups: [
+        { type: "st", label: "Straight sets", sub: "rest after every set", items: [
+          { name: "Dumbbell Bulgarian split squat", sets: 3, reps: "8–10 per leg", start: "15–25", goal: "35–45", unit: "lb each",
+            cue: "Rear foot on the bench, torso upright, front heel stays down.",
+            links: [["Watch demo", "https://fitbod.me/exercises/dumbbell-bulgarian-split-squat"]] }
+        ]},
+        { type: "st", label: "Straight sets", sub: "rest after every set", items: [
+          { name: "Dumbbell hip thrust", sets: 3, reps: "10–12", start: "35–50", goal: "50 + pause", unit: "lb, one dumbbell",
+            cue: "Shoulder blades on the bench edge, squeeze your glutes, ribs down. At 50 lb, add a 2-second pause at the top.",
+            links: [["Watch demo", "https://planfit.ai/exercise/dumbbell-hip-thrust"]] }
+        ]},
+        { type: "st", label: "Straight sets", sub: "rest after every set", items: [
+          { name: "Dumbbell step-up", sets: 3, reps: "10 per leg", start: "15–25", goal: "35–45", unit: "lb each",
+            cue: "Drive through the front leg, don’t push off the back foot. Test the bench with your hand first.",
+            links: [["Watch demo", "https://fitbod.me/exercises/dumbbell-step-up"]] }
+        ]},
+        { type: "st", label: "Straight sets", sub: "rest after every set", items: [
+          { name: "Seated leg curl", sets: 3, reps: "12", start: "40–60", goal: "70–90",
+            cue: "Same machine as Tuesday, smooth and controlled.",
+            links: [["Watch demo", "https://ascendancyfitnessgym.com/equipment/seated-leg-curl.html"]] }
+        ]},
+        { type: "ss", label: "Superset C", items: [
+          { tag: "C1", name: "Standing calf raise", sets: 3, reps: "15", start: "25–35", goal: "45–50", unit: "lb each",
+            cue: "Knees straight, rise high, lower until your heels pass the step or floor.",
+            links: [["Watch demo", "https://www.mymlc.com/health-information/videos/fitness/strength-training/free-weights/video-calf-raise-with-dumbbell/"]] },
+          { tag: "C2", name: "Cable woodchop", sets: 3, reps: "12 per side", start: "15–25", goal: "30–40",
+            cue: "Rotate from the hips and trunk, arms stay long, back straight.",
+            links: [["Watch demo", "https://nz.physitrack.com/home-exercise-video/cable-machine-woodchop"]] }
+        ]}
+      ]
+    }
+  ];
+
+  var GUIDE = '' +
+    '<div class="dayhead"><span class="kicker">Read once</span><h2>Guide</h2></div>' +
+    '<div class="prose">' +
+    '<section><h3>Supersets</h3>' +
+    '<p>A superset is two exercises done back to back with no rest between them, followed by one normal rest of 60–90 seconds before you repeat the pair.</p>' +
+    '<p>Example, Monday: chest press (A1), straight to the pulldown (A2), then rest. That is one round. Do 3 rounds, then move to the next pair.</p>' +
+    '<ul>' +
+    '<li>Pairing removes about half the rest breaks, so all 5 exercises plus cardio fit in 45 minutes.</li>' +
+    '<li>The muscle you just worked recovers while its partner works: push then pull, biceps then triceps, upper then core.</li>' +
+    '<li>Your heart rate stays higher between sets, which adds to calorie burn.</li>' +
+    '<li>A1/A2 is one pair, B1/B2 is the next. A straight set has no partner: rest after every set.</li>' +
+    '<li>If your form slips on the second move, rest between the two or lower the weight.</li>' +
+    '</ul></section>' +
+    '<section><h3>Picking weights</h3>' +
+    '<p>The weights are estimates for a 196 lb (89 kg) man of 52 who is new to lifting or coming back from a break. There is no reliable published average for each machine at your age, because stacks and plate labels differ by brand. Dumbbell weights are per hand.</p>' +
+    '<ul>' +
+    '<li><b>Weeks 1–2 (Start):</b> learn the movement. Choose a weight that leaves you 3 reps short of failure on the last rep of every set.</li>' +
+    '<li><b>Weeks 3–12:</b> add weight whenever you hit the top of the rep range on every set. Goal is a target, not a requirement.</li>' +
+    '<li><b>Already lifting regularly?</b> Start at the top of the Start range or one step above.</li>' +
+    '<li><b>Check the units</b> printed on the Matrix weight stacks (lb or kg) before you pick a number.</li>' +
+    '<li><b>Dumbbells stop at 50 lb.</b> After that, add reps, a 3-second lowering phase, or a pause at the bottom.</li>' +
+    '<li><b>Sharp or joint pain means stop.</b> Drop the weight or skip the exercise and ask a trainer or physio to check your form.</li>' +
+    '</ul></section>' +
+    '<section><h3>Progression</h3>' +
+    '<p>When you reach the top of the rep range on every set with clean form, go up one step next session: the next dumbbell, or one plate on the stack. Write down your weights every session. A lift that stays the same for 2 weeks is a sign to check sleep, protein and form, not to skip it.</p></section>' +
+    '<section><h3>Off days</h3>' +
+    '<p>Wednesday, Saturday and Sunday: a 30–45 minute brisk walk, aiming for 8,000–10,000 steps a day.</p></section>' +
+    '<section><h3>Safety</h3>' +
+    '<p>Exhale as you push or pull, don’t hold your breath, and wipe the bench and handles after use. Stop and get checked for chest pain, dizziness, or sharp joint pain.</p>' +
+    '<p>Demo links come from web searches and open pages with video or step-by-step photos. Preview them before your first session and keep the ones you like.</p></section>' +
+    '</div>';
+
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { state = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  var tabsEl = document.getElementById("tabs");
+  var app = document.getElementById("app");
+  var ids = DAYS.map(function (d) { return d.id; }).concat(["guide"]);
+
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+  function weightCell(label, value, unit) {
+    var u = unit === undefined ? "lb" : unit;
+    return '<div class="num"><small>' + label + '</small><strong>' + esc(value) + '</strong>' + (u ? '<em>' + esc(u) + '</em>' : '') + '</div>';
+  }
+
+  function exercise(dayId, key, it) {
+    var done = state[key] || [];
+    var chips = "";
+    for (var i = 0; i < it.sets; i++) {
+      var on = !!done[i];
+      chips += '<button type="button" class="set" data-key="' + key + '" data-i="' + i + '" aria-pressed="' + on + '" aria-label="Set ' + (i + 1) + ' of ' + it.sets + ', ' + (on ? "done" : "not done") + '">' + (i + 1) + '</button>';
+    }
+    var links = it.links.map(function (l) { return '<a class="demo" href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + esc(l[0]) + '</a>'; }).join("");
+    return '<div class="ex">' +
+      '<div class="ex-top">' + (it.tag ? '<span class="tag">' + it.tag + '</span>' : '') + '<h3>' + esc(it.name) + '</h3></div>' +
+      '<div class="nums">' +
+        '<div class="num"><small>Sets × reps</small><strong>' + it.sets + ' × ' + esc(it.reps) + '</strong></div>' +
+        weightCell("Start", it.start, it.unit) +
+        weightCell("Week 12", it.goal, it.unit) +
+      '</div>' +
+      '<p class="cue">' + esc(it.cue) + '</p>' +
+      '<div class="links">' + links + '</div>' +
+      '<div class="sets"><span class="sets-label">Sets done</span>' + chips + '</div>' +
+    '</div>';
+  }
+
+  function renderDay(day) {
+    var html = '<div class="dayhead"><span class="kicker">' + day.full + '</span><h2>' + esc(day.name) + '</h2>' +
+      '<p class="units">Start = weeks 1–2 &middot; Week 12 = target &middot; weights in lb, dumbbells per hand</p></div>' +
+      '<div class="strip"><b>Warm-up</b><span>' + esc(day.warm) + '</span></div>';
+    var n = 0;
+    day.groups.forEach(function (g) {
+      var inner = "";
+      g.items.forEach(function (it, idx) {
+        if (idx > 0) inner += '<div class="then">then, no rest</div>';
+        inner += exercise(day.id, day.id + "-" + (n++), it);
+      });
+      var sub = g.type === "ss" ? "no rest between the two, then rest 60–90 s" : (g.sub || "");
+      html += '<div class="group ' + g.type + '"><div class="glabel">' + esc(g.label) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</div>' + inner + '</div>';
+    });
+    html += '<div class="strip"><b>Finish</b><span>' + esc(day.finish) + '</span></div>';
+    html += '<button type="button" class="reset" data-day="' + day.id + '">Clear set checks</button>';
+    return html;
+  }
+
+  function show(id) {
+    if (ids.indexOf(id) < 0) id = "mon";
+    var day = DAYS.filter(function (d) { return d.id === id; })[0];
+    app.innerHTML = day ? renderDay(day) : GUIDE;
+    Array.prototype.forEach.call(tabsEl.children, function (b) { b.setAttribute("aria-selected", String(b.dataset.id === id)); });
+    var sel = tabsEl.querySelector('[aria-selected="true"]');
+    if (sel && sel.scrollIntoView) { try { sel.scrollIntoView({ inline: "center", block: "nearest" }); } catch (e) {} }
+    window.scrollTo(0, 0);
+  }
+
+  tabsEl.innerHTML = DAYS.map(function (d) {
+    return '<button type="button" class="tab" role="tab" data-id="' + d.id + '"><b>' + d.tab + '</b><span>' + esc(d.name) + '</span></button>';
+  }).join("") + '<button type="button" class="tab" role="tab" data-id="guide"><b>Guide</b><span>Supersets</span></button>';
+
+  tabsEl.addEventListener("click", function (e) {
+    var b = e.target.closest(".tab");
+    if (b) { location.hash = b.dataset.id; }
+  });
+
+  app.addEventListener("click", function (e) {
+    var set = e.target.closest(".set");
+    if (set) {
+      var key = set.dataset.key, i = +set.dataset.i;
+      var arr = state[key] || [];
+      arr[i] = !arr[i];
+      state[key] = arr;
+      save();
+      var on = !!arr[i];
+      set.setAttribute("aria-pressed", String(on));
+      set.setAttribute("aria-label", "Set " + (i + 1) + ", " + (on ? "done" : "not done"));
+      return;
+    }
+    var r = e.target.closest(".reset");
+    if (r) {
+      Object.keys(state).forEach(function (k) { if (k.indexOf(r.dataset.day + "-") === 0) delete state[k]; });
+      save();
+      var h = location.hash.slice(1);
+      var y = window.scrollY;
+      show(h);
+      window.scrollTo(0, y);
+    }
+  });
+
+  window.addEventListener("hashchange", function () { show(location.hash.slice(1)); });
+
+  var start = location.hash.slice(1);
+  if (ids.indexOf(start) < 0) {
+    var map = { 1: "mon", 2: "tue", 4: "thu", 5: "fri" };
+    start = map[new Date().getDay()] || "mon";
+  }
+  show(start);
+})();
+</script>
+
+</body></html>
