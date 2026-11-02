@@ -1,0 +1,622 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Design Ops Panel Prep</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: single reading column with sticky section nav; panel map as three columns that stack on phones. */
+:root{
+  --paper:#f5efe3;
+  --card:#fbf7ee;
+  --ink:#1f2a2e;
+  --muted:#5d6a6b;
+  --rule:#d9cfba;
+  --accent:#1d5c63;
+  --accent-soft:#d6e6e4;
+  --strong:#2f6b3f; --strong-bg:#dcebd9;
+  --partial:#8a5a00; --partial-bg:#f4e3b8;
+  --gap:#9a3324; --gap-bg:#f3d5cd;
+  --joanne:#1d5c63; --joanne-bg:#d6e6e4;
+  --adam:#6b3f7a; --adam-bg:#e8dcee;
+  --colin:#8a4b12; --colin-bg:#f1dfca;
+  --font-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#171c1e; --card:#1e2528; --ink:#e9e4d8; --muted:#a2aeaa; --rule:#33403f;
+    --accent:#6fc0c7; --accent-soft:#233b3d;
+    --strong:#8fd19b; --strong-bg:#22392a;
+    --partial:#e8c26a; --partial-bg:#40341a;
+    --gap:#f0998a; --gap-bg:#41231e;
+    --joanne:#6fc0c7; --joanne-bg:#223a3d;
+    --adam:#c9a2dc; --adam-bg:#33263b;
+    --colin:#e5b27d; --colin-bg:#3a2a1a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#171c1e; --card:#1e2528; --ink:#e9e4d8; --muted:#a2aeaa; --rule:#33403f;
+  --accent:#6fc0c7; --accent-soft:#233b3d;
+  --strong:#8fd19b; --strong-bg:#22392a;
+  --partial:#e8c26a; --partial-bg:#40341a;
+  --gap:#f0998a; --gap-bg:#41231e;
+  --joanne:#6fc0c7; --joanne-bg:#223a3d;
+  --adam:#c9a2dc; --adam-bg:#33263b;
+  --colin:#e5b27d; --colin-bg:#3a2a1a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--font-body); font-size:16px; line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 64px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+.wrap{max-width:860px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2rem,5vw,2.9rem);font-weight:600;letter-spacing:-.01em}
+h2{font-size:1.65rem;font-weight:600;margin-bottom:6px}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0 0 .8em}
+ul{margin:.3em 0 .8em;padding-left:1.2em}
+li{margin:.25em 0}
+a{color:var(--accent)}
+.mono{font-family:var(--font-mono)}
+.eyebrow{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+
+header.top{padding-top:44px;padding-bottom:26px;border-bottom:1px solid var(--rule)}
+header.top p.lede{font-size:1.1rem;max-width:62ch;margin-top:14px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+
+nav.sticky{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:var(--paper);border-bottom:1px solid var(--rule);
+  overflow-x:auto;white-space:nowrap;
+}
+nav.sticky .wrap{display:flex;gap:4px;padding:8px 0}
+nav.sticky a{
+  font-family:var(--font-mono);font-size:.78rem;text-decoration:none;color:var(--muted);
+  padding:6px 10px;border-radius:4px;
+}
+nav.sticky a:hover,nav.sticky a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+
+section{padding-top:44px;scroll-margin-top:60px}
+.sub{color:var(--muted);margin-bottom:18px;max-width:64ch}
+
+.chip{
+  display:inline-block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.03em;
+  padding:2px 8px;border-radius:3px;white-space:nowrap;vertical-align:middle;
+}
+.chip.strong{color:var(--strong);background:var(--strong-bg)}
+.chip.partial{color:var(--partial);background:var(--partial-bg)}
+.chip.gap{color:var(--gap);background:var(--gap-bg)}
+.chip.joanne{color:var(--joanne);background:var(--joanne-bg)}
+.chip.adam{color:var(--adam);background:var(--adam-bg)}
+.chip.colin{color:var(--colin);background:var(--colin-bg)}
+.chip.neutral{color:var(--muted);background:var(--accent-soft)}
+
+.pitch{
+  background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:22px 24px;margin-top:6px;
+}
+.pitch blockquote{margin:0;font-family:var(--font-display);font-size:1.25rem;line-height:1.5}
+.pitch .lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
+.pitch .lines div{min-width:0}
+.pitch .lines b{display:block;font-family:var(--font-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;font-weight:500}
+
+.panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.person{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 18px 8px;min-width:0}
+.person h3{margin:8px 0 2px}
+.person .role{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+.person dt{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+.person dd{margin:2px 0 0}
+
+.timeline{display:grid;gap:0;border-top:1px solid var(--rule)}
+.timeline div{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.timeline .t{font-family:var(--font-mono);font-size:.85rem;color:var(--accent)}
+.timeline .d{min-width:0}
+@media (max-width:480px){.timeline div{grid-template-columns:1fr;gap:2px}}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--paper)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:500;width:28%}
+td:last-child{width:96px}
+
+.q{border-top:1px solid var(--rule);padding:22px 0 8px}
+.q:first-of-type{border-top:2px solid var(--ink)}
+.q .head{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.q h3{margin-bottom:10px}
+.q .thesis{
+  background:var(--accent-soft);border-radius:4px;padding:10px 14px;margin:0 0 10px;
+}
+.q .thesis b{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-right:8px}
+.q .fill{border-left:3px solid var(--partial);padding:4px 0 4px 12px;color:var(--ink);margin:6px 0 10px}
+.q .fill b{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--partial);font-weight:500}
+
+.gaps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.gapcard{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:16px 18px 6px;min-width:0}
+.gapcard h3{margin-bottom:6px}
+
+.stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.story{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:16px 18px 8px;min-width:0}
+.story h3{margin:6px 0 8px}
+.story .nums{font-family:var(--font-mono);font-size:.84rem;color:var(--accent);margin-bottom:8px}
+
+.ask{display:grid;gap:0;border-top:1px solid var(--rule)}
+.ask div{display:grid;grid-template-columns:88px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:start}
+@media (max-width:480px){.ask div{grid-template-columns:1fr;gap:4px}}
+
+.check{list-style:none;padding:0;margin:0}
+.check li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--rule);margin:0}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.check label{cursor:pointer;min-width:0}
+.check input:checked + label{color:var(--muted);text-decoration:line-through}
+
+.close{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 22px;margin-top:14px;font-family:var(--font-display);font-size:1.1rem;line-height:1.55}
+.note{color:var(--muted);font-size:.9rem}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--rule)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<header class="top">
+<div class="wrap">
+  <div class="eyebrow">Panel interview, 60 minutes</div>
+  <h1>Director, Design Operations, Global Wealth Management</h1>
+  <p class="lede">You have a strong case on team leadership, governance, capability building and measurable outcomes. The areas to prepare most are tools and vendor management, responsible AI, and formal capacity planning. This guide gives you a pitch, a read on each panelist, likely questions with answer outlines, and questions to ask back.</p>
+  <div class="meta">
+    <span class="chip joanne">Joanne Lister · Head of Design, hiring manager</span>
+    <span class="chip adam">Adam Ebrahim · Head of Product</span>
+    <span class="chip colin">Colin Smith · Lead Content Designer</span>
+  </div>
+</div>
+</header>
+
+<nav class="sticky" aria-label="Sections"><div class="wrap">
+  <a href="#pitch">Pitch</a><a href="#panel">Panel</a><a href="#hour">The hour</a><a href="#fit">Fit map</a><a href="#questions">Questions</a><a href="#ai">AI framework</a><a href="#gaps">Gaps</a><a href="#stories">Stories</a><a href="#ask">Ask them</a><a href="#before">Checklist</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="pitch">
+  <div class="eyebrow">Start here</div>
+  <h2>Your pitch in one breath</h2>
+  <p class="sub">Say this early and come back to it. Every answer should connect to it.</p>
+  <div class="pitch">
+    <blockquote>“I make design teams run well at scale. At Scotiabank I led a team of 20, built the governance model that 25+ product squads used, and tied design work to results like 66% faster deployments. I want to do that full time, as the person who gives Joanne's team the runway, visibility and structure to do its best work.”</blockquote>
+    <div class="lines">
+      <div><b>Three things to land</b>Operating model and governance. Team development. Measurable impact.</div>
+      <div><b>One thing to prove</b>Governance that creates runway for designers, not gates that slow them down.</div>
+      <div><b>One thing to own</b>You have not run formal tool procurement or AI governance. You have a clear plan for both.</div>
+    </div>
+  </div>
+</section>
+
+<section id="panel">
+  <div class="eyebrow">Know the room</div>
+  <h2>What each panelist will listen for</h2>
+  <p class="sub">I do not have background on these three beyond their titles, so this is inferred from their roles. Check their LinkedIn profiles and adjust.</p>
+  <div class="panel">
+    <div class="person">
+      <span class="chip joanne">Hiring manager</span>
+      <h3>Joanne Lister</h3>
+      <div class="role">Head of Design</div>
+      <dl>
+        <dt>Listening for</dt><dd>Can this person take operations off my plate and speak for design when I am not there? The role lists acting as her delegate.</dd>
+        <dt>Your angle</dt><dd>You have held her seat. You know what a Head of Design needs to see: demand, capacity, risk and team health.</dd>
+        <dt>Watch out</dt><dd>Sounding like a Head of Design who wants her job. Position yourself as her operating partner.</dd>
+      </dl>
+    </div>
+    <div class="person">
+      <span class="chip adam">Product partner</span>
+      <h3>Adam Ebrahim</h3>
+      <div class="role">Head of Product</div>
+      <dl>
+        <dt>Listening for</dt><dd>Will design become more predictable for my teams? Will intake and prioritization match my roadmap, or add friction?</dd>
+        <dt>Your angle</dt><dd>Design and Product share one demand picture. You make dependencies and capacity visible early, with fewer surprises.</dd>
+        <dt>Watch out</dt><dd>Process language. Talk about delivery, runway and outcomes, not templates and tracking.</dd>
+      </dl>
+    </div>
+    <div class="person">
+      <span class="chip colin">Craft voice</span>
+      <h3>Colin Smith</h3>
+      <div class="role">Lead Content Designer</div>
+      <dl>
+        <dt>Listening for</dt><dd>Will content design be treated as a full discipline in the operating model, or pulled in late?</dd>
+        <dt>Your angle</dt><dd>Your 20 person team included Content designers. You built a community of practice, mentoring and career paths across disciplines.</dd>
+        <dt>Watch out</dt><dd>Talking only about product designers. Name content, research and accessibility as equal parts of the system.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="hour">
+  <div class="eyebrow">Pacing</div>
+  <h2>How to spend the 60 minutes</h2>
+  <p class="sub">Three panelists and one hour leaves about four minutes per question. Aim for answers of two minutes or less, then stop and let them pull the thread.</p>
+  <div class="timeline">
+    <div><span class="t">0 to 5</span><span class="d">Introductions. Your two minute opener (question 1 below). Look at all three people.</span></div>
+    <div><span class="t">5 to 40</span><span class="d">Their questions. Expect around eight. Lead with the thesis line, give one proof point, then check in with a short pause.</span></div>
+    <div><span class="t">40 to 52</span><span class="d">Your questions. Ask one for each panelist, and use their answers to adjust your final statement.</span></div>
+    <div><span class="t">52 to 60</span><span class="d">Close. Restate the three things, name the first 90 days, and say you want the role.</span></div>
+  </div>
+</section>
+
+<section id="fit">
+  <div class="eyebrow">Job description vs your record</div>
+  <h2>Where you are strong, partial and exposed</h2>
+  <p class="sub">Strength reflects what is on your resume today. Partial means you have adjacent evidence but need a sharper example. Gap means nothing on the resume supports it yet.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Job description asks for</th><th>Your evidence</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr><td>Define the design operations vision and operating models</td><td>Owned design vision and strategy as Head of Product Design. Led multiyear roadmaps with Product and Engineering.</td><td><span class="chip strong">Strong</span></td></tr>
+      <tr><td>Lead and develop a team</td><td>Led 20 people. Career progression framework, senior designers coached into lead roles, minimal rotation over 5 years.</td><td><span class="chip strong">Strong</span></td></tr>
+      <tr><td>Ways of working, standards, decision rights</td><td>Design system governance model adopted by 25+ squads. 33% higher UI reusability.</td><td><span class="chip strong">Strong</span></td></tr>
+      <tr><td>Build organizational design capability</td><td>Design Community of Practice, mentoring across Product, Content, Research. Grew from about 10 to 150+ members.</td><td><span class="chip strong">Strong</span></td></tr>
+      <tr><td>Accessibility and inclusive design operations</td><td>AODA/WCAG advice to executives. RGD accessibility panelist, 2021. Inclusive design on the roadmap.</td><td><span class="chip strong">Strong</span></td></tr>
+      <tr><td>Represent design in leadership forums, act as delegate</td><td>Advised executives on trade-offs. Ran enterprise partnerships as Head of Product Design.</td><td><span class="chip strong">Strong</span></td></tr>
+      <tr><td>Complex regulated environment</td><td>Nine years at Scotiabank. Current program coordinates risk, architecture, product and engineering.</td><td><span class="chip strong">Strong</span></td></tr>
+      <tr><td>Demonstrate measurable impact of design</td><td>66% faster deployment, +12% engagement, $0.5M savings, 4.7+ app ratings. These are product outcomes. Operational and maturity metrics are thinner.</td><td><span class="chip partial">Partial</span></td></tr>
+      <tr><td>Portfolio planning, demand management, capacity and workforce planning</td><td>Resume lists org design and resource planning. No specific intake or capacity model is described.</td><td><span class="chip partial">Partial</span></td></tr>
+      <tr><td>Governance visibility, executive reporting</td><td>Executive advising and roadmaps. No named dashboard or reporting cadence.</td><td><span class="chip partial">Partial</span></td></tr>
+      <tr><td>Facilitation and decision making</td><td>Co-created multiyear vision with Product and Engineering. A named workshop or planning session would help.</td><td><span class="chip partial">Partial</span></td></tr>
+      <tr><td>Responsible AI in design workflows</td><td>MIT xPRO Generative AI certificate (2024) and a three layer framework. No shipped example of AI in a design workflow on the resume.</td><td><span class="chip gap">Gap</span></td></tr>
+      <tr><td>Design tools, licences, vendor management, procurement</td><td>Nothing on the resume. Procurement is also named as a partner in the role.</td><td><span class="chip gap">Gap</span></td></tr>
+      <tr><td>Wealth management experience (asset)</td><td>Banking, not wealth. It is listed as an asset, not a requirement.</td><td><span class="chip partial">Partial</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="questions">
+  <div class="eyebrow">Likely questions</div>
+  <h2>Fourteen questions and how to answer them</h2>
+  <p class="sub">Each answer starts with the point, then one proof, then what you would do here. Yellow boxes mark where I need a real example from you. Do not use placeholders on the day.</p>
+
+  <div class="q">
+    <div class="head"><span class="chip joanne">Joanne</span><span class="chip neutral">Opener</span></div>
+    <h3>1. Tell us about yourself.</h3>
+    <p class="thesis"><b>Thesis</b>I have spent 20 years in design, and the work I do best is the system around the designers.</p>
+    <ul>
+      <li><b>Past:</b> started as a hands on designer at Bell and the Scotiabank Digital Factory, then led design for Caribbean and Central America, growing a team from 3 to 12.</li>
+      <li><b>Peak:</b> Head of Product Design in Canada, a team of 20 including the Design Systems and Ops team, with governance adopted by 25+ squads.</li>
+      <li><b>Now:</b> leading the program to retire the legacy banking platform, which is close to operations work: dependencies, risk partners, delivery.</li>
+      <li><b>Why here:</b> this role is that work, as the full focus.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip joanne">Joanne</span></div>
+    <h3>2. You led 20 people and this role has two direct reports. Why this scale, and why Design Operations?</h3>
+    <p class="thesis"><b>Thesis</b>The scope here is bigger than the headcount. It covers the whole design organization's operating model.</p>
+    <ul>
+      <li>The role serves Digital Experience Design across Global Wealth Management, so influence comes through governance, planning and tools, not reporting lines.</li>
+      <li>You enjoyed the Design Systems and Ops part of leading 20 people most, and the 25+ squad governance model is the proof.</li>
+      <li>You are choosing operations because it multiplies other designers' output.</li>
+    </ul>
+    <div class="fill"><b>Your call</b> Decide your one sentence about leaving as Head of Product Design in Oct 2025 and returning as a contractor. Keep it calm, short and forward looking. They will notice if it sounds rehearsed or defensive.</div>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip joanne">Joanne</span><span class="chip adam">Adam</span></div>
+    <h3>3. What would you do in your first 90 days?</h3>
+    <p class="thesis"><b>Thesis</b>Listen first, make the work visible second, change things third.</p>
+    <ul>
+      <li><b>Days 1 to 30:</b> meet each design lead, Product, Technology, Design Systems, Delivery and Procurement partner. Map current demand, who works on what, which tools exist and where work stalls.</li>
+      <li><b>Days 31 to 60:</b> publish one shared view of demand and capacity. Agree a simple intake path with Adam's team. Pick three operational metrics.</li>
+      <li><b>Days 61 to 90:</b> run the first quarterly planning cycle on the new view. Present a design operations roadmap and what you learned about tools and AI.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip adam">Adam</span></div>
+    <h3>4. Walk us through how you would run intake, prioritization and capacity planning.</h3>
+    <p class="thesis"><b>Thesis</b>One front door, clear criteria, and a capacity picture that Product can read in five minutes.</p>
+    <ul>
+      <li>Intake: one request path that captures the outcome, the date, the dependencies and the discovery runway needed.</li>
+      <li>Prioritization: criteria agreed with Product up front (customer impact, business value, risk, readiness), reviewed on a regular cadence.</li>
+      <li>Capacity: roles and skills, not only headcount, with leave, onboarding and support work included. Update it monthly.</li>
+      <li>Say that the model should be as light as the team can sustain, and you would start with the highest volume work.</li>
+    </ul>
+    <div class="fill"><b>Your call</b> Add a real example of how you planned resources across the 20 person team or the regional practice, such as how you decided who worked on which platform, even if it was informal.</div>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip adam">Adam</span></div>
+    <h3>5. How do you stop design operations from becoming bureaucracy that slows product teams down?</h3>
+    <p class="thesis"><b>Thesis</b>Governance should buy runway. If a rule does not give designers or product teams more time or clarity, it should go.</p>
+    <ul>
+      <li>Evidence: the design system governance model worked across 25+ squads because it made reuse easier than starting over. Deployment time fell 66%, UI reuse rose 33%.</li>
+      <li>Test every process by asking what it saves, who benefits and when it expires.</li>
+      <li>Measure product team satisfaction with design operations, and publish the result.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip adam">Adam</span><span class="chip joanne">Joanne</span></div>
+    <h3>6. How do you show the impact of design?</h3>
+    <p class="thesis"><b>Thesis</b>Use four layers: delivery, customer, team health and design maturity. Report them together.</p>
+    <ul>
+      <li>Delivery and customer results from your record: 66% faster deployments, +12% engagement, $0.5M savings, 4.7+ app ratings across 4.7M users.</li>
+      <li>Team health: retention, engagement, career movement. You had minimal rotation over 5 years.</li>
+      <li>Maturity: a simple, repeatable scorecard for research, accessibility, systems and process. Say you would design this with Joanne in the first quarter.</li>
+      <li>Be clear that design rarely owns a result alone. Describe your contribution and the shared outcome.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip adam">Adam</span></div>
+    <h3>7. Tell us about a time Design and Product disagreed on priorities. What did you do?</h3>
+    <p class="thesis"><b>Thesis</b>Get both sides looking at the same facts, then decide by the agreed criteria.</p>
+    <ul>
+      <li>Best source: the web banking modernization, where 25+ product teams were held back by a fragmented platform and you worked with Product and Engineering on the plan.</li>
+      <li>Structure it as situation, the conflict, what you put on the table (data, options, cost), the decision, and the result.</li>
+    </ul>
+    <div class="fill"><b>Your call</b> Pick a real disagreement and its outcome, including something you would do differently. Panels trust a story with a lesson.</div>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip colin">Colin</span></div>
+    <h3>8. Where does content design fit in your operating model?</h3>
+    <p class="thesis"><b>Thesis</b>Content is a core discipline with its own capacity and standards, and it needs a seat at the start of intake.</p>
+    <ul>
+      <li>Your team of 20 included Content. Name that directly.</li>
+      <li>Intake should flag content needs early, so content designers are not handed finished screens.</li>
+      <li>Standards: shared voice and plain language guidance, content review in the quality checkpoints, and content in the design system.</li>
+      <li>Ask Colin where content work gets stuck today. His answer is your best first fact finding input.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip colin">Colin</span><span class="chip joanne">Joanne</span></div>
+    <h3>9. How do you build design capability across disciplines?</h3>
+    <p class="thesis"><b>Thesis</b>Make learning part of the weekly rhythm, and give every discipline a visible path.</p>
+    <ul>
+      <li>Design Community of Practice grew from about 10 to 150+ members, covering craft, coaching and DEI.</li>
+      <li>Career progression framework and mentoring for Product Designers, Content Writers, Product Managers and UX Researchers.</li>
+      <li>For this role: onboarding, critique formats, documentation and a learning pathway for each discipline.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip joanne">Joanne</span><span class="chip adam">Adam</span><span class="chip colin">Colin</span></div>
+    <h3>10. How would you approach responsible AI in design work?</h3>
+    <p class="thesis"><b>Thesis</b>Sequence it in three layers: team, system, experience. Put guidance and human oversight around all three. The full answer is in the AI framework section.</p>
+    <ul>
+      <li><b>Team layer:</b> everyday production work such as research synthesis, variants, accessibility checks and copy drafts. Fast return, contained risk. Start here, but do not stop here.</li>
+      <li><b>System layer:</b> a tokenized, machine readable design system that AI can work against and stay on standard. The hardest layer to build and the one that compounds. This is the headline.</li>
+      <li><b>Experience layer:</b> personalization, dynamic content, conversational interfaces. Highest customer impact and highest risk, so go here once the system layer is sound.</li>
+      <li>Around all three: guidance, enablement, measurement and human oversight, as the job description describes. For content, add review rules for accuracy and tone, since Colin's team will feel it first.</li>
+    </ul>
+    <div class="fill"><b>Your call</b> AI has been a weak spot in earlier interviews because there was no concrete shipped example. Say only what is true today about what you have used or piloted. The AI framework section has the full spoken answer.</div>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip joanne">Joanne</span></div>
+    <h3>11. What is your experience with design tools, licences and vendors?</h3>
+    <p class="thesis"><b>Thesis</b>Here is what I have done, and here is how I would build the rest quickly.</p>
+    <ul>
+      <li>Share any real involvement: choosing or standardizing tools, license counts, vendor reviews, security or privacy reviews for a tool, or design system tooling.</li>
+      <li>If your experience is light, show the method: inventory what exists, map to use, check accessibility, privacy and security requirements, set a renewal calendar, track adoption.</li>
+      <li>Say you would partner with Procurement and Technology early, since they own the process.</li>
+    </ul>
+    <div class="fill"><b>Your call</b> This is the biggest gap against the job description. Find one honest example before the interview.</div>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip adam">Adam</span><span class="chip joanne">Joanne</span></div>
+    <h3>12. Tell us about influencing senior stakeholders without authority.</h3>
+    <p class="thesis"><b>Thesis</b>I bring evidence, name the trade-off, and make the decision easy to take.</p>
+    <ul>
+      <li>You advised executives on competitive analysis, AODA/WCAG compliance and experience trade-offs.</li>
+      <li>The legacy decommission program is a current example: no authority over product, engineering, architecture or risk, and everyone moving together.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip joanne">Joanne</span><span class="chip colin">Colin</span></div>
+    <h3>13. Tell us about coaching someone who was struggling.</h3>
+    <p class="thesis"><b>Thesis</b>Be specific early, support them, and be fair about the outcome.</p>
+    <div class="fill"><b>Your call</b> The role names performance management and succession planning. Prepare one story with a clear expectation, a plan, support you gave, and the result. A story where the person grew is strong. A story where they moved on respectfully is also fine.</div>
+  </div>
+
+  <div class="q">
+    <div class="head"><span class="chip joanne">Joanne</span></div>
+    <h3>14. You have not worked in wealth management. Why should we choose you?</h3>
+    <p class="thesis"><b>Thesis</b>I know this bank, its risk culture and its platforms. The operating model is the same. The clients are different.</p>
+    <ul>
+      <li>Nine years inside Scotiabank across Canada and the region, and a current program with risk and architecture partners.</li>
+      <li>Wealth is listed as an asset. Say you will spend the first weeks with advisors and clients to learn the journeys.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="eyebrow">Your AI answer</div>
+  <h2>The three layer AI framework</h2>
+  <p class="sub">Carried over from your KPMG prep and adapted to this role. The order is the point: team, then system, then experience. The system layer is your headline, and it connects to the Design Systems partnership named in the job description.</p>
+  <div class="stories">
+    <div class="story">
+      <span class="chip neutral">Layer 1</span>
+      <h3>Team layer</h3>
+      <div class="nums">What designers, researchers and content designers do every day</div>
+      <ul>
+        <li>Research synthesis, variant generation, accessibility checks, copy drafts, design QA.</li>
+        <li>Most teams start here. The return is fast and the risk is contained.</li>
+        <li>The trap is treating it as the whole story.</li>
+      </ul>
+    </div>
+    <div class="story" style="border:2px solid var(--accent)">
+      <span class="chip joanne">Layer 2 · headline</span>
+      <h3>System layer</h3>
+      <div class="nums">Tokenized, machine readable, componentized design system</div>
+      <ul>
+        <li>AI can generate variants that stay on standard, flag inconsistencies and keep accessibility rules in the loop.</li>
+        <li>The hardest layer to build, the one that compounds, and the one most organizations skip.</li>
+        <li>In this role you would partner closely with Design Systems.</li>
+      </ul>
+    </div>
+    <div class="story">
+      <span class="chip neutral">Layer 3</span>
+      <h3>Experience layer</h3>
+      <div class="nums">Personalization, dynamic content, conversational interfaces</div>
+      <ul>
+        <li>Highest customer impact and highest risk, especially where trust and regulation set the bar.</li>
+        <li>Go here once the system layer is sound, not before.</li>
+        <li>Teams often jump from layer 1 to layer 3 because that is where the headlines are.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Say it out loud (about 90 seconds)</h3>
+  <div class="pitch" style="margin-top:10px">
+    <blockquote>“My honest take is that AI in design is roughly where mobile was in 2008. Everyone is talking about it, most teams use it tactically, and very few treat it as infrastructure. I look at it in three layers, and the order matters.<br><br>The first is the team layer: what designers, researchers and content designers do every day. Research synthesis, variants, accessibility checks, copy drafts. Most teams start here because the return is fast and the risk is contained. The trap is treating it as the whole story.<br><br>The second is the system layer. If the design system is tokenized and machine readable, AI can work against it and stay on standard. It is the hardest layer to build, it is the one that compounds, and most organizations skip it. In this role I would work closely with Design Systems on it.<br><br>The third is the experience layer: personalization, dynamic content, conversational interfaces. Highest customer impact and highest risk, especially in wealth management where trust and regulation set the bar. You go there once the system layer is sound.<br><br>Around all three sits the operational work this role owns: guidance on approved tools and data, enablement, measurement, and human oversight, with risk and compliance partners in from the start. I see this as a framework to test against what you are already seeing, not a finished answer.”</blockquote>
+  </div>
+  <div class="q" style="border-top:0;padding-top:14px">
+    <div class="fill"><b>Your call</b> The original KPMG script said you had been actively integrating layer 1 at Scotiabank and bringing your MIT xPRO learning into how your teams work. I left both lines out. Add them back only if they are still true and you can name a specific example.</div>
+  </div>
+
+  <h3 style="margin-top:10px">Follow ups to expect</h3>
+  <div class="ask" style="margin-top:10px">
+    <div><span class="chip joanne">Joanne</span><span><b>Where would you start here?</b> A 30 day audit of what people already use and what risk teams have set. Then guidance and shared resources for layer 1, and layer 2 readiness with Design Systems. Layer 3 only with Product and risk partners at the table.</span></div>
+    <div><span class="chip joanne">Joanne</span><span><b>What is the biggest risk?</b> Quality and brand drift, and data leaving the bank. Make the approved path the easy path: approved tools, clear data rules and review checkpoints, so standards are built into the work and not only written in guidelines.</span></div>
+    <div><span class="chip adam">Adam</span><span><b>Where does Product fit?</b> Layer 3 belongs to Product and Design together. Sequence it on the shared roadmap once the system layer and the risk review are ready.</span></div>
+    <div><span class="chip colin">Colin</span><span><b>What does this mean for content?</b> Copy drafting is a layer 1 use. Add review rules for accuracy, tone and plain language, and keep content designers as the owners of voice. Ask Colin what his team already tries.</span></div>
+    <div><span class="chip neutral">Any</span><span><b>Will AI replace designers?</b> The risk is designers who do not change how they work. The role shifts from production to judgment: framing the problem, setting constraints, evaluating output. Operations builds the learning pathways for that.</span></div>
+    <div><span class="chip neutral">Any</span><span><b>What have you actually used yourself?</b> Name two or three specific tools and what each gave you. Only say what is true. Specifics build credibility, and a modest real answer beats a big claim.</span></div>
+  </div>
+</section>
+
+<section id="gaps">
+  <div class="eyebrow">Be honest, be ready</div>
+  <h2>Gaps and how to handle them</h2>
+  <p class="sub">Name the gap in one sentence, give the closest real experience, then say what you would do. Never invent an example.</p>
+  <div class="gaps">
+    <div class="gapcard">
+      <span class="chip gap">Gap</span>
+      <h3>Tools, licences and vendors</h3>
+      <ul>
+        <li>Look for any real example from Scotiabank: Figma setup, design system tooling, a tool review.</li>
+        <li>Otherwise present the 5 step method from question 11.</li>
+      </ul>
+    </div>
+    <div class="gapcard">
+      <span class="chip gap">Gap</span>
+      <h3>Responsible AI</h3>
+      <ul>
+        <li>Lead with the three layer framework (see the AI framework section), then the MIT xPRO certificate, then a small first pilot you would run.</li>
+        <li>Be clear that human oversight and bank risk rules come first.</li>
+      </ul>
+    </div>
+    <div class="gapcard">
+      <span class="chip partial">Partial</span>
+      <h3>Capacity and workforce planning</h3>
+      <ul>
+        <li>You did resource planning for teams of 12 and 20. Describe how, in plain terms.</li>
+        <li>Offer to build the formal model in the first 60 days.</li>
+      </ul>
+    </div>
+    <div class="gapcard">
+      <span class="chip partial">Partial</span>
+      <h3>Operational metrics and executive reporting</h3>
+      <ul>
+        <li>Your strongest numbers are product outcomes. Pair them with team health data.</li>
+        <li>Say what a one page monthly report would show, and who would read it.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="stories">
+  <div class="eyebrow">Stories bank</div>
+  <h2>Five stories to have ready</h2>
+  <p class="sub">Each should take about two minutes. Use them for several questions.</p>
+  <div class="stories">
+    <div class="story">
+      <span class="chip neutral">Questions 5, 6, 7, 12</span>
+      <h3>Web banking modernization</h3>
+      <div class="nums">66% faster deployments · +12% engagement · $0.5M saved in 6 months · 33% more UI reuse</div>
+      <ul>
+        <li>A fragmented platform held back 25+ product teams.</li>
+        <li>You worked with Product and Engineering on microapps and modular components.</li>
+        <li>Now you are running the decommission of the legacy platform.</li>
+      </ul>
+    </div>
+    <div class="story">
+      <span class="chip neutral">Questions 3, 5, 9</span>
+      <h3>Design system governance</h3>
+      <div class="nums">25+ squads · one governance model</div>
+      <ul>
+        <li>Standards and decision rights adopted across squads.</li>
+        <li>Tie this to the role's "ways of working" and "quality checkpoints".</li>
+      </ul>
+    </div>
+    <div class="story">
+      <span class="chip neutral">Questions 1, 2, 9, 13</span>
+      <h3>Building and developing teams</h3>
+      <div class="nums">3 to 12 in the region · 20 in Canada · minimal rotation over 5 years</div>
+      <ul>
+        <li>Career progression framework, senior designers promoted to lead.</li>
+        <li>Community of Practice from about 10 to 150+.</li>
+      </ul>
+    </div>
+    <div class="story">
+      <span class="chip neutral">Questions 6, 12</span>
+      <h3>Mobile app at scale</h3>
+      <div class="nums">4.7M users · 24M+ transactions a month · 4.7+ star ratings</div>
+      <ul>
+        <li>Design roadmap, accessibility and performance discipline across iOS and Android.</li>
+        <li>Useful for the impact and quality conversation.</li>
+      </ul>
+    </div>
+    <div class="story">
+      <span class="chip neutral">Questions 7, 12, 14</span>
+      <h3>Legacy platform decommission</h3>
+      <div class="nums">Current role · risk, architecture, product, engineering</div>
+      <ul>
+        <li>Shows delivery, dependency and risk management in the bank today.</li>
+        <li>Explain how it uses the same skills as design operations.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="ask">
+  <div class="eyebrow">Your turn</div>
+  <h2>Questions to ask them</h2>
+  <p class="sub">Ask one for each person. Listen for their answer and use it in your closing.</p>
+  <div class="ask">
+    <div><span class="chip joanne">Joanne</span><span>What would make you say in a year that this role has been a success? What is the first thing you want taken off your plate?</span></div>
+    <div><span class="chip joanne">Joanne</span><span>Where is the design operating model strongest today, and where does the team feel the most friction?</span></div>
+    <div><span class="chip adam">Adam</span><span>How do Product and Design set priorities together right now, and what would you change about it?</span></div>
+    <div><span class="chip adam">Adam</span><span>What would you want to see in a design capacity or delivery report to trust it?</span></div>
+    <div><span class="chip colin">Colin</span><span>When does content design usually join a project, and what would help most if that happened earlier?</span></div>
+    <div><span class="chip colin">Colin</span><span>What does the content design team need from operations that it does not get today?</span></div>
+    <div><span class="chip neutral">Any</span><span>Where does the team stand today on AI tools, and what limits have risk or compliance set?</span></div>
+    <div><span class="chip neutral">Any</span><span>What are the next steps and timing for the process?</span></div>
+  </div>
+</section>
+
+<section id="before">
+  <div class="eyebrow">Before you join</div>
+  <h2>Checklist and closing</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="c1"><label for="c1">Look up Joanne, Adam and Colin on LinkedIn. Note one thing each cares about.</label></li>
+    <li><input type="checkbox" id="c2"><label for="c2">Fill in the yellow boxes: a Product and Design disagreement, a coaching story, one tools or vendor example, one AI example.</label></li>
+    <li><input type="checkbox" id="c3"><label for="c3">Decide your one sentence about your Scotiabank history since October 2025.</label></li>
+    <li><input type="checkbox" id="c4"><label for="c4">Practice questions 1, 3 and 10 out loud with a timer. Two minutes each.</label></li>
+    <li><input type="checkbox" id="c5"><label for="c5">Have the tailored resume and the job description open, with your numbers on a sticky note.</label></li>
+    <li><input type="checkbox" id="c6"><label for="c6">Prepare one question for each panelist. Check the room, camera and sound ten minutes early.</label></li>
+    <li><input type="checkbox" id="c7"><label for="c7">Send a short thank you to all three within a day. Reference something each person said.</label></li>
+  </ul>
+  <div class="close">“I would be glad to take on this role. I can give Joanne's team a clear operating model, give Adam's teams predictable design capacity, and give Colin's discipline a real place in how work is planned. I have done the hard part of this at Scotiabank at scale, and I would be excited to do it here.”</div>
+  <footer class="note">Based on the job description and your master resume, October 2026. Numbers come from your resume and job search notes. Confirm each one before you say it.</footer>
+</section>
+
+</main>
+
+</body></html>
