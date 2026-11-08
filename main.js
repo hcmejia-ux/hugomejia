@@ -156,17 +156,6 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-// ===== Leadership Disclosure =====
-document.querySelectorAll('.leadership__toggle').forEach(toggle => {
-  toggle.addEventListener('click', () => {
-    const list = toggle.closest('.leadership__col').querySelector('.leadership__list');
-    toggle.setAttribute('aria-expanded', 'true');
-    list.setAttribute('aria-hidden', 'false');
-    list.classList.add('is-open');
-  });
-});
-
-
 // ===== Contact Modal =====
 const contactLink       = document.getElementById('contactLink');
 const contactLinkAbout  = document.getElementById('contactLinkAbout');

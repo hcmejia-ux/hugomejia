@@ -578,44 +578,7 @@ img {
 }
 
 .leadership__list {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  margin-top: 0;
-  transition: max-height 0.4s var(--ease), opacity 0.35s var(--ease), margin-top 0.35s var(--ease);
-}
-
-.leadership__list.is-open {
-  max-height: 400px;
-  opacity: 1;
   margin-top: 8px;
-}
-
-.leadership__toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  margin-top: 12px;
-  padding: 6px;
-  border: 0;
-  background: transparent;
-  color: var(--clr-accent);
-  cursor: pointer;
-  transition: color 0.3s var(--ease);
-}
-
-.leadership__toggle:hover {
-  color: var(--clr-accent-hover);
-}
-
-.leadership__chevron {
-  transition: transform 0.35s var(--ease);
-  pointer-events: none;
-}
-
-.leadership__toggle[aria-expanded="true"] {
-  display: none;
 }
 
 @media (max-width: 768px) {
